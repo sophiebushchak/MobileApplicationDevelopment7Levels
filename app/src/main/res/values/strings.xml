@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MadLevel1Example</string>
+    <string name="animal_label">What kind of animal is this?</string>
+    <string name="answer_hint">Species</string>
+</resources>
