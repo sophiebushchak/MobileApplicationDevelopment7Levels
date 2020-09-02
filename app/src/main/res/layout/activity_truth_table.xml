@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TruthTableActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/conjunctionANDTitleText"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/aColumnHeader"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/aColumnHeaderText"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/aColumnRow1"
+        app:layout_constraintEnd_toStartOf="@+id/bColumnHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/bColumnHeader"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/bColumnHeaderText"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bColumnRow1"
+        app:layout_constraintEnd_toStartOf="@+id/inputColumnHeader"
+        app:layout_constraintStart_toEndOf="@+id/aColumnHeader"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <!--Row 1 Start-->
+
+    <TextView
+        android:id="@+id/inputColumnHeader"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:text="@string/input_header_text"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/inputColumnRow1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bColumnHeader"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/aColumnRow1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:gravity="center"
+        android:text="@string/trueText"
+        android:textAlignment="center"
+        android:textSize="18sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/aColumnRow2"
+
+        app:layout_constraintEnd_toStartOf="@+id/bColumnRow1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aColumnHeader" />
+
+    <TextView
+        android:id="@+id/bColumnRow1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/falseText"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:gravity="center"
+
+        app:layout_constraintBottom_toTopOf="@+id/bColumnRow2"
+        app:layout_constraintEnd_toStartOf="@+id/inputColumnRow1"
+        app:layout_constraintStart_toEndOf="@+id/aColumnRow1"
+        app:layout_constraintTop_toBottomOf="@+id/bColumnHeader" />
+
+    <!--Row 1 End-->
+
+    <!--Row 2 Start-->
+
+    <EditText
+        android:id="@+id/inputColumnRow1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+
+        app:layout_constraintBottom_toTopOf="@+id/inputColumnRow2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bColumnRow1"
+        app:layout_constraintTop_toBottomOf="@+id/inputColumnHeader" />
+
+    <TextView
+        android:id="@+id/aColumnRow2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:gravity="center"
+        android:text="@string/trueText"
+        android:textAlignment="center"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/aColumnRow3"
+        app:layout_constraintEnd_toStartOf="@+id/bColumnRow2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aColumnRow1" />
+
+    <TextView
+        android:id="@+id/bColumnRow2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/falseText"
+        android:textAlignment="center"
+        android:gravity="center"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/bColumnRow3"
+        app:layout_constraintEnd_toStartOf="@+id/inputColumnRow2"
+        app:layout_constraintStart_toEndOf="@+id/aColumnRow2"
+        app:layout_constraintTop_toBottomOf="@+id/bColumnRow1" />
+
+    <EditText
+        android:id="@+id/inputColumnRow2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+
+        app:layout_constraintBottom_toTopOf="@+id/inputColumnRow3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bColumnRow2"
+        app:layout_constraintTop_toBottomOf="@+id/inputColumnRow1" />
+    <!--Row 2 End-->
+
+    <!--Row 3 Start-->
+    <TextView
+        android:id="@+id/aColumnRow3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:gravity="center"
+        android:text="@string/falseText"
+        android:textAlignment="center"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/aColumnRow4"
+        app:layout_constraintEnd_toStartOf="@+id/bColumnRow3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aColumnRow2" />
+
+    <TextView
+        android:id="@+id/bColumnRow3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/trueText"
+        android:textAlignment="center"
+        android:gravity="center"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/bColumnRow4"
+        app:layout_constraintEnd_toStartOf="@+id/inputColumnRow3"
+        app:layout_constraintStart_toEndOf="@+id/aColumnRow3"
+        app:layout_constraintTop_toBottomOf="@+id/bColumnRow2" />
+
+    <EditText
+        android:id="@+id/inputColumnRow3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/inputColumnRow4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bColumnRow3"
+        app:layout_constraintTop_toBottomOf="@+id/inputColumnRow2" />
+    <!--Row 3 End-->
+
+    <!--Row 4 Start-->
+    <TextView
+        android:id="@+id/aColumnRow4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="@string/falseText"
+
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/bColumnRow4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aColumnRow3" />
+
+    <TextView
+        android:id="@+id/bColumnRow4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="@string/falseText"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/inputColumnRow4"
+        app:layout_constraintStart_toEndOf="@+id/aColumnRow4"
+        app:layout_constraintTop_toBottomOf="@+id/bColumnRow3" />
+
+    <EditText
+        android:id="@+id/inputColumnRow4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:gravity="center"
+
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bColumnRow4"
+        app:layout_constraintTop_toBottomOf="@+id/inputColumnRow3" />
+    <!--Row 4 End-->
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
