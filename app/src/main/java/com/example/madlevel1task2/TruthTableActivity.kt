@@ -17,6 +17,9 @@ class TruthTableActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Goes down the input fields and counts how many were answered correctly.
+     * */
     private fun countCorrect(): Int {
         var amountCorrect: Int = 0;
         val answerTT = binding.inputColumnRow1.text.toString()
@@ -38,6 +41,9 @@ class TruthTableActivity : AppCompatActivity() {
         return amountCorrect
     }
 
+    /**
+     * Calls [countCorrect] to give the user feedback on the entered answers.
+     */
     private fun giveFeedback() {
         Toast.makeText(this,"${countCorrect()} out of 4 correct!", Toast.LENGTH_LONG).show()
     }
