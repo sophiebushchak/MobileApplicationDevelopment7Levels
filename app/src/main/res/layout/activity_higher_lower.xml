@@ -10,29 +10,34 @@
         android:id="@+id/helpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/help_text"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/help"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/dice1"
+        app:layout_constraintBottom_toTopOf="@+id/btnEqual"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="302dp" />
+        app:layout_constraintTop_toTopOf="@+id/helpText" />
 
     <TextView
         android:id="@+id/lastThrowText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/last_throw_text"
+        android:text="@string/last_throw"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +47,7 @@
         android:id="@+id/btnLower"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_lower_text"
+        android:text="@string/btn_lower"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnEqual"
         app:layout_constraintStart_toStartOf="parent" />
@@ -51,7 +56,7 @@
         android:id="@+id/btnEqual"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_equals_text"
+        android:text="@string/btn_equals"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnHigher"
         app:layout_constraintStart_toEndOf="@id/btnLower" />
@@ -60,7 +65,7 @@
         android:id="@+id/btnHigher"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_higher_text"
+        android:text="@string/btn_higher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnEqual" />
