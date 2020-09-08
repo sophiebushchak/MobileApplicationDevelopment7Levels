@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel2task2.databinding.ItemQuestionBinding
 
-class PlaceAdapter(private val questions: ArrayList<Question>) :
-    RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
+class QuestionAdapter(private val questions: ArrayList<Question>) :
+    RecyclerView.Adapter<QuestionAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
