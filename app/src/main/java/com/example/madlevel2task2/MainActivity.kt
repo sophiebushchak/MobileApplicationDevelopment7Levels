@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         initViews()
     }
 
+    /**
+     * Adds the QuestionAdapter to the RecyclerView and fills the list with some questions
+     * Also adds the item touch helper to the RecyclerView.
+     */
     private fun initViews() {
         binding.rvQuestions.layoutManager =
             LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
@@ -41,12 +45,14 @@ class MainActivity : AppCompatActivity() {
         questions.add(Question("Dp stands for density-independent pixels.", true))
         questions.add(Question("View binding is the same as findViewById", false))
 
-
-
         questionAdapter.notifyDataSetChanged()
         createItemTouchHelper().attachToRecyclerView(rvQuestions)
     }
 
+    /**
+     * Adds an ItemTouchHelper with swipe functionality.
+     * A different Snackbar is displayed based on direction swiped and the actual status of the question.
+     */
     private fun createItemTouchHelper(): ItemTouchHelper {
         var callback = object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or
@@ -86,6 +92,9 @@ class MainActivity : AppCompatActivity() {
         return ItemTouchHelper(callback)
     }
 
+    /**
+     * Notifies user of being correct and why.
+     */
     private fun displayCorrectSnackbar(questionTruthness: Boolean) {
         var snackbarMessage: String = "You are correct! It's "
         if (questionTruthness) {
@@ -96,6 +105,9 @@ class MainActivity : AppCompatActivity() {
         Snackbar.make(binding.root, snackbarMessage, Snackbar.LENGTH_SHORT).show()
     }
 
+    /**
+     * Notifies user of being incorrect and why.
+     */
     private fun displayIncorrectSnackbar(questionTruthness: Boolean) {
         var snackbarMessage: String = "You are incorrect! It's "
         if (questionTruthness) {
