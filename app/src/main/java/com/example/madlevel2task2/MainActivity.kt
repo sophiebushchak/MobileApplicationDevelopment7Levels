@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel2task2.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         questions.add(Question("A 'val' and 'var' are the same.", false))
         questions.add(Question("Mobile Application Developments grants 12 ECTS.", false))
         questions.add(Question("A Unit in Kotlin corresponds to a void in Java", true))
-        questions.add(Question("In Kotlin 'when' replaces the 'switch' operation in Java.", false))
+        questions.add(Question("In Kotlin 'when' replaces the 'switch' operation in Java.", true))
         questionAdapter.notifyDataSetChanged()
         createItemTouchHelper().attachToRecyclerView(rvQuestions)
     }
@@ -57,15 +58,15 @@ class MainActivity : AppCompatActivity() {
                 val swipedQuestion: Question = questions[position]
                 if (direction == ItemTouchHelper.RIGHT) {
                     if (swipedQuestion.isTrue) {
-                        displayCorrectSnackbar();
+                        displayCorrectSnackbar(swipedQuestion.isTrue);
                     } else {
-                        displayIncorrectSnackbar();
+                        displayIncorrectSnackbar(swipedQuestion.isTrue);
                     }
                 } else if (direction == ItemTouchHelper.LEFT) {
                     if (!swipedQuestion.isTrue) {
-                        displayCorrectSnackbar();
+                        displayCorrectSnackbar(swipedQuestion.isTrue);
                     } else {
-                        displayIncorrectSnackbar();
+                        displayIncorrectSnackbar(swipedQuestion.isTrue);
                     }
                 }
             }
@@ -73,12 +74,24 @@ class MainActivity : AppCompatActivity() {
         return ItemTouchHelper(callback)
     }
 
-    private fun displayCorrectSnackbar() {
-        TODO("Not yet implemented")
+    private fun displayCorrectSnackbar(questionTruthness: Boolean) {
+        var snackbarMessage: String = "You are correct! It's "
+        if (questionTruthness) {
+            snackbarMessage += "true!"
+        } else {
+            snackbarMessage += "false!"
+        }
+        Snackbar.make(binding.root, snackbarMessage, Snackbar.LENGTH_SHORT).show()
     }
 
-    private fun displayIncorrectSnackbar() {
-        TODO("Not yet implemented")
+    private fun displayIncorrectSnackbar(questionTruthness: Boolean) {
+        var snackbarMessage: String = "You are incorrect! It's "
+        if (questionTruthness) {
+            snackbarMessage += "true!"
+        } else {
+            snackbarMessage += "false!"
+        }
+        Snackbar.make(binding.root, snackbarMessage, Snackbar.LENGTH_SHORT).show()
     }
 
 
