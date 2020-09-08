@@ -37,6 +37,12 @@ class MainActivity : AppCompatActivity() {
         questions.add(Question("Mobile Application Developments grants 12 ECTS.", false))
         questions.add(Question("A Unit in Kotlin corresponds to a void in Java", true))
         questions.add(Question("In Kotlin 'when' replaces the 'switch' operation in Java.", true))
+        questions.add(Question("Android 8.0 Oreo is the latest Android version.", false))
+        questions.add(Question("Dp stands for density-independent pixels.", true))
+        questions.add(Question("View binding is the same as findViewById", false))
+
+
+
         questionAdapter.notifyDataSetChanged()
         createItemTouchHelper().attachToRecyclerView(rvQuestions)
     }
@@ -59,14 +65,20 @@ class MainActivity : AppCompatActivity() {
                 if (direction == ItemTouchHelper.RIGHT) {
                     if (swipedQuestion.isTrue) {
                         displayCorrectSnackbar(swipedQuestion.isTrue);
+                        questions.removeAt(position)
+                        questionAdapter.notifyItemRemoved(position)
                     } else {
                         displayIncorrectSnackbar(swipedQuestion.isTrue);
+                        questionAdapter.notifyItemChanged(position)
                     }
                 } else if (direction == ItemTouchHelper.LEFT) {
                     if (!swipedQuestion.isTrue) {
                         displayCorrectSnackbar(swipedQuestion.isTrue);
+                        questions.removeAt(position)
+                        questionAdapter.notifyItemRemoved(position)
                     } else {
                         displayIncorrectSnackbar(swipedQuestion.isTrue);
+                        questionAdapter.notifyItemChanged(position)
                     }
                 }
             }
