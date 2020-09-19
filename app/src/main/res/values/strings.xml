@@ -12,4 +12,7 @@
     <string name="tvStartTitle">Welcome to the Games Rating app!</string>
     <string name="tvStartHint">Click START to start rating :)</string>
     <string name="btnStart">Start</string>
+    <string name="tvRatingTitle">Rate the following game from 1 to 5 stars!</string>
+    <string name="tvGameName">sample name</string>
+    <string name="btnSummary">To summary</string>
 </resources>
