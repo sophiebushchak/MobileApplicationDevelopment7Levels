@@ -44,6 +44,6 @@ class RatingFragment : Fragment() {
         args.putFloat(ARG_GAME_RATING, ratingBar.rating)
         args.putString(ARG_GAME_NAME, tvGameName.text.toString())
 
-        findNavController().navigate(R.id.action_ratingFragment_to_summaryFragment)
+        findNavController().navigate(R.id.action_ratingFragment_to_summaryFragment, args)
     }
 }
