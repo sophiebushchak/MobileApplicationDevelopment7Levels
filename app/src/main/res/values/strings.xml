@@ -15,4 +15,6 @@
     <string name="tvRatingTitle">Rate the following game from 1 to 5 stars!</string>
     <string name="tvGameName">sample name</string>
     <string name="btnSummary">To summary</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
