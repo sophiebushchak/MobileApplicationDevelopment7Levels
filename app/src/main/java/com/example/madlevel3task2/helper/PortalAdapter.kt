@@ -8,7 +8,10 @@ import com.example.madlevel3task2.R
 import com.example.madlevel3task2.model.Portal
 import kotlinx.android.synthetic.main.item_portal.view.*
 
-class PortalAdapter(private val portals: List<Portal>) : RecyclerView.Adapter<PortalAdapter.ViewHolder>(){
+class PortalAdapter(
+    private val portals: List<Portal>,
+    private val clickListener: (Portal) -> Unit
+) : RecyclerView.Adapter<PortalAdapter.ViewHolder>() {
 
     /**
      * Creates and returns a ViewHolder object, inflating a standard layout called simple_list_item_1.
@@ -30,13 +33,16 @@ class PortalAdapter(private val portals: List<Portal>) : RecyclerView.Adapter<Po
      * Called by RecyclerView to display the data at the specified position.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.databind(portals[position])
+        holder.databind(portals[position], clickListener)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun databind(portal: Portal) {
+        fun databind(portal: Portal, clickListener: (Portal) -> Unit) {
             itemView.tvPortalTitle.text = portal.title
             itemView.tvPortalUrl.text = portal.url
+            itemView.setOnClickListener {
+                clickListener(portal)
+            }
         }
     }
 }

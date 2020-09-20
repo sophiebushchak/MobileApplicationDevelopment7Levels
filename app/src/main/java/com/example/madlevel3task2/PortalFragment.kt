@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel3task2.helper.PortalAdapter
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_create_portal.*
  */
 class PortalFragment : Fragment() {
     private val portals = arrayListOf<Portal>()
-    private val portalAdapter = PortalAdapter(portals)
+    private val portalAdapter = PortalAdapter(portals) { portal : Portal -> portalClicked(portal) }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +37,14 @@ class PortalFragment : Fragment() {
         observeAddPortalResult()
     }
 
+    private fun initViews() {
+        rvPortals.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL,false)
+        rvPortals.adapter = portalAdapter
+    }
+
+    /*
+    * Observes the Portal request from CreatePortalFragment and adds the portal if the bundle has
+    * the portal title and url.*/
     private fun observeAddPortalResult() {
         var portalTitle : String? = null;
         setFragmentResultListener(PORTAL_REQUEST_KEY) { key, bundle ->
@@ -52,10 +61,8 @@ class PortalFragment : Fragment() {
         }
     }
 
-    private fun initViews() {
-                rvPortals.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL,false)
-                rvPortals.adapter = portalAdapter
+    private fun portalClicked(portal: Portal) {
+        Toast.makeText(activity, "Clicked: ${portal.title}", Toast.LENGTH_LONG).show()
     }
-
 
 }
