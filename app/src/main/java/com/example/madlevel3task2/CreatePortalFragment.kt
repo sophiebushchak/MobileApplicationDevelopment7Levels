@@ -34,7 +34,6 @@ class CreatePortalFragment : Fragment() {
     }
 
     private fun onAddPortal() {
-        val args = Bundle()
         val portalTitle = etPortalTitle.text.toString()
         val portalUrl = etPortalUrl.text.toString()
 
@@ -45,7 +44,7 @@ class CreatePortalFragment : Fragment() {
         }  else {
             Toast.makeText(
                 activity,
-                "Invalid portal", Toast.LENGTH_SHORT
+                getString(R.string.invalid_portal_message), Toast.LENGTH_SHORT
             ).show()
         }
     }

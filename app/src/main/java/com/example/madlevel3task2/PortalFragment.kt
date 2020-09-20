@@ -1,19 +1,20 @@
 package com.example.madlevel3task2
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel3task2.helper.PortalAdapter
 import com.example.madlevel3task2.model.Portal
 import kotlinx.android.synthetic.main.fragment_portal.*
 import androidx.fragment.app.setFragmentResultListener
-import kotlinx.android.synthetic.main.fragment_create_portal.*
 
 
 /**
@@ -46,8 +47,8 @@ class PortalFragment : Fragment() {
     * Observes the Portal request from CreatePortalFragment and adds the portal if the bundle has
     * the portal title and url.*/
     private fun observeAddPortalResult() {
-        var portalTitle : String? = null;
-        setFragmentResultListener(PORTAL_REQUEST_KEY) { key, bundle ->
+        var portalTitle : String? = null
+        setFragmentResultListener(PORTAL_REQUEST_KEY) { _, bundle ->
             bundle.getString(BUNDLE_PORTAL_TITLE_KEY
             )?.let {
                 portalTitle = it
@@ -61,8 +62,18 @@ class PortalFragment : Fragment() {
         }
     }
 
+    /*
+    * Clicker handler for Portal, opens url in the portal as a Chrome Custom Tab
+    * Credit/inspiration: https://github.com/anandwana001/mindorks-cct/blob/master/app/src/main/java/com/akshay/mindorks_cct/MainActivity.kt*/
     private fun portalClicked(portal: Portal) {
-        Toast.makeText(activity, "Clicked: ${portal.title}", Toast.LENGTH_LONG).show()
+        val uri = portal.url
+        val builder = CustomTabsIntent.Builder()
+        builder.setToolbarColor(ContextCompat.getColor(this.requireContext(), R.color.colorPrimary))
+        builder.addDefaultShareMenuItem()
+        builder.setShowTitle(true)
+        builder.setStartAnimations(this.requireContext(), android.R.anim.fade_in, android.R.anim.fade_out)
+        builder.setExitAnimations(this.requireContext(), android.R.anim.fade_in, android.R.anim.fade_out)
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(this.requireContext(), Uri.parse(uri))
+        }
     }
-
-}
