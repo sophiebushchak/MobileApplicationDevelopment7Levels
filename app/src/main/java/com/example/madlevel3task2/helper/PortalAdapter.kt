@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel3task2.R
 import com.example.madlevel3task2.model.Portal
+import kotlinx.android.synthetic.main.item_portal.view.*
 
 class PortalAdapter(private val portals: List<Portal>) : RecyclerView.Adapter<PortalAdapter.ViewHolder>(){
 
@@ -34,7 +35,8 @@ class PortalAdapter(private val portals: List<Portal>) : RecyclerView.Adapter<Po
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun databind(portal: Portal) {
-            itemView.tvReminder.text = portal.title
+            itemView.tvPortalTitle.text = portal.title
+            itemView.tvPortalUrl.text = portal.url
         }
     }
 }
