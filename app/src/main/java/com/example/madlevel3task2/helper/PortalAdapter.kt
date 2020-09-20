@@ -1,5 +1,6 @@
 package com.example.madlevel3task2.helper
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class PortalAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun databind(portal: Portal, clickListener: (Portal) -> Unit) {
+            itemView.tvPortalUrl.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             itemView.tvPortalTitle.text = portal.title
             itemView.tvPortalUrl.text = portal.url
             itemView.setOnClickListener {
