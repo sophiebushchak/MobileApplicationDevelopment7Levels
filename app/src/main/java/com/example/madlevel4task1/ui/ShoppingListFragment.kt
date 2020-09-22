@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel4task1.R
@@ -32,6 +33,8 @@ class ShoppingListFragment : Fragment() {
     private val productAdapter = ProductAdapter(products)
     private lateinit var productRepository: ProductRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
+    private lateinit var viewManager: RecyclerView.LayoutManager
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -49,17 +52,30 @@ class ShoppingListFragment : Fragment() {
         fbAdd.setOnClickListener {
             showAddProductDialog();
         }
+        fbRemove.setOnClickListener {
+            removeAllProducts()
+        }
     }
 
     private fun initViews() {
-        rvProducts.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        rvProducts.adapter = productAdapter
-        rvProducts.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-        rvProducts.setHasFixedSize(true)
+        viewManager = LinearLayoutManager(activity)
+        rvProducts.addItemDecoration(
+            DividerItemDecoration(
+                activity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        createItemTouchHelper().attachToRecyclerView(rvProducts)
+
+        rvProducts.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = productAdapter
+        }
     }
 
     @SuppressLint("InflateParams")
-    private fun showAddProductdialog() {
+    private fun showAddProductDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.add_product_dialog_title))
         val dialogLayout = layoutInflater.inflate(R.layout.add_product_dialog, null)
@@ -89,6 +105,15 @@ class ShoppingListFragment : Fragment() {
         }
     }
 
+    private fun removeAllProducts() {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                productRepository.deleteAllProducts()
+            }
+            getShoppingListFromDatabase()
+        }
+    }
+
     private fun validateFields(txtProductName: EditText
                                , txtAmount: EditText
     ): Boolean {
@@ -113,5 +138,38 @@ class ShoppingListFragment : Fragment() {
         }
     }
 
+    /**
+     * Create a touch helper to recognize when a user swipes an item from a recycler view.
+     * An ItemTouchHelper enables touch behavior (like swipe and move) on each ViewHolder,
+     * and uses callbacks to signal when a user is performing these actions.
+     */
+    private fun createItemTouchHelper(): ItemTouchHelper {
 
+        // Callback which is used to create the ItemTouch helper. Only enables left swipe.
+        // Use ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) to also enable right swipe.
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            // Enables or Disables the ability to move items up and down.
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            // Callback triggered when a user swiped an item.
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val productToDelete = products[position]
+                mainScope.launch {
+                    withContext(Dispatchers.IO) {
+                        productRepository.deleteProduct(productToDelete)
+                    }
+                    getShoppingListFromDatabase()
+                }
+            }
+        }
+        return ItemTouchHelper(callback)
+    }
 }
