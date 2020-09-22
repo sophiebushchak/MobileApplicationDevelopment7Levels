@@ -1,11 +1,11 @@
 package com.example.madlevel4task2.model
 
-import android.os.Build
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.example.madlevel4task2.R
-import java.time.LocalDateTime
+import com.example.madlevel4task2.tools.DateConverters
 import java.util.*
 
 @Entity(tableName = "game_history_table")
