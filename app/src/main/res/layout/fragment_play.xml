@@ -7,7 +7,7 @@
     tools:context=".PlayFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvPlayTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -19,121 +19,122 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvPlayInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/tvPlayInstructions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPlayTitle" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/vLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:layout_editor_absoluteX="-16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlayInstructions" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvStatisticsDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/tvStatisticsDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/vLine" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvStatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatisticsDescription"
         tools:text="Win: 8 Draw: 5 Lose: 10" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvGameResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatistics"
         tools:text="You win!" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivResultPlayerThrow"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="88dp"
         android:background="#5D6FCF"
         android:src="@drawable/paper"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/ivThrowPaper"
+        app:layout_constraintEnd_toStartOf="@+id/tvVersus"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/tvGameResult" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivResultOpponentThrow"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="88dp"
         android:background="#5D6FCF"
         android:src="@drawable/scissors"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintBottom_toTopOf="@+id/ivThrowPaper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/tvVersus"
+        app:layout_constraintTop_toTopOf="@+id/tvGameResult" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tvVersus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="96dp"
         android:text="@string/tvVersus"
         android:textSize="30sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/ivThrowPaper"
+        app:layout_constraintEnd_toStartOf="@+id/ivResultOpponentThrow"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/ivResultPlayerThrow"
+        app:layout_constraintTop_toBottomOf="@+id/tvGameResult" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/ivThrowRock"
         android:layout_width="125dp"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:background="#45529A"
         android:src="@drawable/rock"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/ivThrowPaper"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivThrowPaper"
         android:layout_width="125dp"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:background="#45529A"
         android:src="@drawable/paper"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/ivThrowScissors"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView3" />
+        app:layout_constraintStart_toEndOf="@+id/ivThrowRock" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ivThrowScissors"
         android:layout_width="125dp"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
@@ -142,6 +143,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView4" />
+        app:layout_constraintStart_toEndOf="@+id/ivThrowPaper" />
+
+    <TextView
+        android:id="@+id/tvResultLabelYou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivResultPlayerThrow"
+        app:layout_constraintStart_toStartOf="@+id/ivResultPlayerThrow"
+        app:layout_constraintTop_toBottomOf="@+id/ivResultPlayerThrow"
+        tools:text="You" />
+
+    <TextView
+        android:id="@+id/tvResultLabelOpponent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivResultOpponentThrow"
+        app:layout_constraintStart_toStartOf="@+id/ivResultOpponentThrow"
+        app:layout_constraintTop_toBottomOf="@+id/ivResultOpponentThrow"
+        tools:text="Opponent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
