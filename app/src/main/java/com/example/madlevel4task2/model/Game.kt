@@ -16,6 +16,16 @@ data class Game (
             if (thrown == Throw.ROCK) return R.drawable.rock
             return 1;
         }
+
+        public fun getResult(playerThrown: Throw, opponentThrown: Throw): GameResult {
+            return if (playerThrown == Throw.PAPER && opponentThrown == Throw.ROCK
+                || playerThrown == Throw.ROCK && opponentThrown == Throw.SCISSORS
+                || playerThrown == Throw.SCISSORS && opponentThrown == Throw.PAPER) {
+                GameResult.WIN
+            } else if (playerThrown == opponentThrown) {
+                GameResult.DRAW
+            } else GameResult.LOSE
+        }
     }
 }
 
