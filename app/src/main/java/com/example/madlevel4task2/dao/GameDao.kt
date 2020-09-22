@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.example.madlevel4task2.model.Game
 
 @Dao
-interface ProductDao {
+interface GameDao {
     @Query("SELECT * FROM game_history_table")
     suspend fun getGameHistory(): List<Game>
 
