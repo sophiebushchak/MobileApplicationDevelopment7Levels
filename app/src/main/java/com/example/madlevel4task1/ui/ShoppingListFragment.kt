@@ -47,11 +47,14 @@ class ShoppingListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         productRepository = ProductRepository(requireContext())
-        initViews()
         getShoppingListFromDatabase()
+
+        initViews()
+
         fbAdd.setOnClickListener {
             showAddProductDialog();
         }
+
         fbRemove.setOnClickListener {
             removeAllProducts()
         }
