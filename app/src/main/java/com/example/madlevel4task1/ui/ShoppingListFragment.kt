@@ -12,7 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel4task1.R
 import com.example.madlevel4task1.model.Product
+import com.example.madlevel4task1.repository.ProductRepository
 import kotlinx.android.synthetic.main.fragment_shopping_list.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -20,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_shopping_list.*
 class ShoppingListFragment : Fragment() {
     private val products = arrayListOf<Product>()
     private val productAdapter = ProductAdapter(products)
+    private lateinit var productRepository: ProductRepository
+    private val mainScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -31,13 +38,27 @@ class ShoppingListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        productRepository = ProductRepository(requireContext())
         initViews()
     }
 
     private fun initViews() {
-        rvProducts.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        rvProducts.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvProducts.adapter = productAdapter
-        rvProducts.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
-        products.add(Product("Test", 1))
+        rvProducts.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+        rvProducts.setHasFixedSize(true)
     }
+
+    private fun getShoppingListFromDatabase() {
+        mainScope.launch {
+            val products = withContext(Dispatchers.IO) {
+                productRepository.getAllProducts()
+            }
+            this@ShoppingListFragment.products.clear()
+            this@ShoppingListFragment.products.addAll(products)
+            this@ShoppingListFragment.productAdapter.notifyDataSetChanged()
+        }
+    }
+
+
 }
