@@ -11,7 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.madlevel4task2.model.Game
 import com.example.madlevel4task2.model.GameResult
 import com.example.madlevel4task2.model.Throw
+import com.example.madlevel4task2.repository.GameHistoryRepository
 import kotlinx.android.synthetic.main.fragment_play.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.LocalDateTime
 import java.util.*
@@ -21,6 +26,8 @@ import java.util.*
  */
 class PlayFragment : Fragment() {
     private var currentGame: Game? = null
+    private lateinit var gameHistoryRepository: GameHistoryRepository
+    private val mainScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +43,11 @@ class PlayFragment : Fragment() {
     }
 
     private fun initViews() {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                gameHistoryRepository.deleteGameHistory()
+            }
+        }
         setResultVisibility()
         ivThrowPaper.setOnClickListener {
             onClickThrow(Throw.PAPER)
@@ -77,7 +89,12 @@ class PlayFragment : Fragment() {
         }
         ivResultPlayerThrow.setImageResource(Game.getThrowImage(thrown))
         ivResultOpponentThrow.setImageResource(Game.getThrowImage(opponentThrown))
-        this.currentGame = Game(Date(), thrown, opponentThrown, result)
+        currentGame = Game(Date(), thrown, opponentThrown, result)
         setResultVisibility()
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                gameHistoryRepository.insertIntoGameHistory(Game(Date(), thrown, opponentThrown, result))
+            }
+        }
     }
 }

@@ -1,9 +1,6 @@
 package com.example.madlevel4task2.repository
 
 import android.content.Context
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
 import com.example.madlevel4task2.dao.GameDao
 import com.example.madlevel4task2.database.RockPaperScissorsRoomDatabase
 import com.example.madlevel4task2.model.Game

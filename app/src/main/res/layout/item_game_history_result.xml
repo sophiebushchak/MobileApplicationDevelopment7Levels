@@ -26,10 +26,10 @@
         android:layout_marginBottom="8dp"
         android:text="@string/tvResultLabelYou"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ivResultPlayerThrow2"
+        app:layout_constraintEnd_toEndOf="@+id/ivHistoryPlayerThrow"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/ivResultPlayerThrow2"
-        app:layout_constraintTop_toBottomOf="@+id/ivResultPlayerThrow2" />
+        app:layout_constraintStart_toStartOf="@+id/ivHistoryPlayerThrow"
+        app:layout_constraintTop_toBottomOf="@+id/ivHistoryPlayerThrow" />
 
     <ImageView
         android:id="@+id/ivHistoryOpponentThrow"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvHistoryVersus"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHistoryDate" />
 
     <TextView
         android:id="@+id/tvHistoryVersus"
@@ -53,11 +53,11 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivHistoryOpponentThrow"
         app:layout_constraintEnd_toStartOf="@+id/ivHistoryOpponentThrow"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ivResultPlayerThrow2"
+        app:layout_constraintStart_toEndOf="@+id/ivHistoryPlayerThrow"
         app:layout_constraintTop_toTopOf="@+id/ivHistoryOpponentThrow" />
 
     <ImageView
-        android:id="@+id/ivResultPlayerThrow2"
+        android:id="@+id/ivHistoryPlayerThrow"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
@@ -66,21 +66,21 @@
         app:layout_constraintEnd_toStartOf="@+id/tvHistoryVersus"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHistoryDate" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvHistoryDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/tvHistoryResult"
         tools:text="Mon Jun 22 09:15:44 GMT+00:00 2020" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvHistoryResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
