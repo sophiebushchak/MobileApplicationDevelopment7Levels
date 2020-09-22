@@ -1,14 +1,26 @@
 package com.example.madlevel4task2.model
 
 import android.os.Build
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.madlevel4task2.R
 import java.time.LocalDateTime
 import java.util.*
 
+@Entity(tableName = "game_history_table")
 data class Game (
+    @PrimaryKey
+    @ColumnInfo(name = "game_date")
     val date: Date,
+
+    @ColumnInfo(name = "game_player_throw")
     val playerThrow: Throw,
+
+    @ColumnInfo(name = "game_opponent_throw")
     val opponentThrow: Throw,
+
+    @ColumnInfo(name = "game_result")
     val result: GameResult
 ) {
     companion object {
