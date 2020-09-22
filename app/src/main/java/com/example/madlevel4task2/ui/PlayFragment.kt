@@ -12,6 +12,7 @@ import com.example.madlevel4task2.model.Game
 import com.example.madlevel4task2.model.GameResult
 import com.example.madlevel4task2.model.Throw
 import kotlinx.android.synthetic.main.fragment_play.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -47,25 +48,13 @@ class PlayFragment : Fragment() {
 
     private fun onClickThrow(thrown: Throw) {
         val opponentThrown = Throw.values().random()
-        TestResult(getResult(thrown, opponentThrown))
+        val result: GameResult = Game.getResult(thrown, opponentThrown)
+        if (result != GameResult.DRAW) {
+            tvGameResult.text = getString(R.string.tvResult, result.toString().toLowerCase(Locale.US))
+        } else {
+            tvGameResult.text = getString(R.string.tvResult, "drew")
+        }
         ivResultPlayerThrow.setImageResource(Game.getThrowImage(thrown))
         ivResultOpponentThrow.setImageResource(Game.getThrowImage(opponentThrown))
     }
-
-    private fun getResult(playerThrown: Throw, opponentThrown: Throw): GameResult {
-        return if (playerThrown == Throw.PAPER && opponentThrown == Throw.ROCK
-            || playerThrown == Throw.ROCK && opponentThrown == Throw.SCISSORS
-            || playerThrown == Throw.SCISSORS && opponentThrown == Throw.PAPER) {
-            GameResult.WIN
-        } else return GameResult.LOSE
-    }
-
-    private fun TestResult(result: GameResult) {
-        if (result == GameResult.WIN) {
-            Toast.makeText(activity, "Win!", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(activity, "Lose!", Toast.LENGTH_SHORT).show()
-        }
-    }
-
 }
