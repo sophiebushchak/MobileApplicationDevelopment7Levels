@@ -1,6 +1,8 @@
 package com.example.madlevel4task2.model
 
+import android.os.Build
 import com.example.madlevel4task2.R
+import java.time.LocalDateTime
 import java.util.*
 
 data class Game (

@@ -7,4 +7,6 @@
     <string name="tvStatisticsDescription">Your all time statistics</string>
     <string name="tvVersus">V.S.</string>
     <string name="tvResult">You %s!</string>
+    <string name="tvResultLabelYou">You</string>
+    <string name="tvResultLabelOpponent">Opponent</string>
 </resources>

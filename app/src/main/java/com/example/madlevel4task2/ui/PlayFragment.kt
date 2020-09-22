@@ -12,12 +12,15 @@ import com.example.madlevel4task2.model.Game
 import com.example.madlevel4task2.model.GameResult
 import com.example.madlevel4task2.model.Throw
 import kotlinx.android.synthetic.main.fragment_play.*
+import java.time.Instant
+import java.time.LocalDateTime
 import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class PlayFragment : Fragment() {
+    private var currentGame: Game? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,7 @@ class PlayFragment : Fragment() {
     }
 
     private fun initViews() {
+        setResultVisibility()
         ivThrowPaper.setOnClickListener {
             onClickThrow(Throw.PAPER)
         }
@@ -42,7 +46,24 @@ class PlayFragment : Fragment() {
         }
         ivThrowScissors.setOnClickListener {
             onClickThrow(Throw.SCISSORS)
+        }
+    }
 
+    private fun setResultVisibility() {
+        if (this.currentGame != null) {
+            tvGameResult.visibility = View.VISIBLE
+            tvVersus.visibility = View.VISIBLE
+            tvResultLabelYou.visibility = View.VISIBLE
+            tvResultLabelOpponent.visibility = View.VISIBLE
+            ivResultPlayerThrow.visibility = View.VISIBLE
+            ivResultOpponentThrow.visibility = View.VISIBLE
+        } else {
+            tvGameResult.visibility = View.INVISIBLE
+            tvVersus.visibility = View.INVISIBLE
+            tvResultLabelYou.visibility = View.INVISIBLE
+            tvResultLabelOpponent.visibility = View.INVISIBLE
+            ivResultPlayerThrow.visibility = View.INVISIBLE
+            ivResultOpponentThrow.visibility = View.INVISIBLE
         }
     }
 
@@ -56,5 +77,7 @@ class PlayFragment : Fragment() {
         }
         ivResultPlayerThrow.setImageResource(Game.getThrowImage(thrown))
         ivResultOpponentThrow.setImageResource(Game.getThrowImage(opponentThrown))
+        this.currentGame = Game(Date(), thrown, opponentThrown, result)
+        setResultVisibility()
     }
 }
