@@ -42,7 +42,7 @@
         android:id="@+id/tvStatisticsDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tvStatisticsDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,6 @@
         android:id="@+id/tvStatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStatisticsDescription"
@@ -62,8 +61,8 @@
         android:id="@+id/tvGameResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvVersus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStatistics"
@@ -73,39 +72,38 @@
         android:id="@+id/ivResultPlayerThrow"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="88dp"
         android:background="#5D6FCF"
-        app:layout_constraintBottom_toTopOf="@+id/ivThrowPaper"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvVersus"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvGameResult" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/ivResultOpponentThrow"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="88dp"
         android:background="#5D6FCF"
-        app:layout_constraintBottom_toTopOf="@+id/ivThrowPaper"
+        app:layout_constraintBottom_toTopOf="@+id/tvResultLabelOpponent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvVersus"
-        app:layout_constraintTop_toTopOf="@+id/tvGameResult" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStatistics"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tvVersus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
         android:text="@string/tvVersus"
         android:textSize="30sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/ivThrowPaper"
+        app:layout_constraintBottom_toBottomOf="@+id/ivResultOpponentThrow"
         app:layout_constraintEnd_toStartOf="@+id/ivResultOpponentThrow"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivResultPlayerThrow"
-        app:layout_constraintTop_toBottomOf="@+id/tvGameResult" />
+        app:layout_constraintTop_toTopOf="@+id/ivResultOpponentThrow" />
 
     <ImageView
         android:id="@+id/ivThrowRock"
@@ -159,6 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/tvResultLabelOpponent"
+        app:layout_constraintBottom_toTopOf="@+id/ivThrowScissors"
         app:layout_constraintEnd_toEndOf="@+id/ivResultOpponentThrow"
         app:layout_constraintStart_toStartOf="@+id/ivResultOpponentThrow"
         app:layout_constraintTop_toBottomOf="@+id/ivResultOpponentThrow" />
