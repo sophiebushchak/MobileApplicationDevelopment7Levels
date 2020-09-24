@@ -9,4 +9,5 @@
     <string name="tvResult">You %s!</string>
     <string name="tvResultLabelYou">You</string>
     <string name="tvResultLabelOpponent">Opponent</string>
+    <string name="action_goto_history">View History</string>
 </resources>

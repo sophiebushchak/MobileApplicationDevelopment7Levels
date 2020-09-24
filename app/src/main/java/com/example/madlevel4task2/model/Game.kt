@@ -10,7 +10,7 @@ import java.util.*
 
 @Entity(tableName = "game_history_table")
 data class Game (
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "game_date")
     val date: Date,
 
