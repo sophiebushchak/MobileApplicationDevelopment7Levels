@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.madlevel4task2.model.Game
+import com.example.madlevel4task2.model.GameResult
 
 @Dao
 interface GameDao {
@@ -19,4 +20,7 @@ interface GameDao {
 
     @Query("DELETE FROM game_history_table")
     suspend fun deleteGameHistory()
+
+    @Query("SELECT count(game_result) FROM game_history_table WHERE game_result = :gameResult")
+    suspend fun countAResult(gameResult: GameResult): Int
 }

@@ -72,6 +72,7 @@ class PlayFragment : Fragment() {
         ivThrowScissors.setOnClickListener {
             onClickThrow(Throw.SCISSORS)
         }
+        updateStatisticsView()
     }
 
     private fun setResultVisibility() {
@@ -105,16 +106,31 @@ class PlayFragment : Fragment() {
         }
     }
 
+    private fun updateStatisticsView() {
+        mainScope.launch {
+            var wins = 0
+            var losses = 0
+            var draws = 0
+            withContext(Dispatchers.IO) {
+                wins = gameHistoryRepository.countAResult(GameResult.WIN)
+                losses = gameHistoryRepository.countAResult(GameResult.LOSE)
+                draws = gameHistoryRepository.countAResult(GameResult.DRAW)
+            }
+            tvStatistics.text = getString(R.string.tvStatistics, wins, draws, losses)
+        }
+    }
+
 
     private fun onClickThrow(thrown: Throw) {
         val opponentThrown = Throw.values().random()
         currentGame = Game(Date(), thrown, opponentThrown, Game.getResult(thrown, opponentThrown))
-        updateResultViews(currentGame)
         setResultVisibility()
         mainScope.launch {
             withContext(Dispatchers.IO) {
                 gameHistoryRepository.insertIntoGameHistory(currentGame!!)
+                updateStatisticsView()
             }
         }
+        updateResultViews(currentGame)
     }
 }
