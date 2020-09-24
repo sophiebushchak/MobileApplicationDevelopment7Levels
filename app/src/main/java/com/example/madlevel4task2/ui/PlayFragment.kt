@@ -1,12 +1,14 @@
 package com.example.madlevel4task2
 
+import android.app.Activity
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.madlevel4task2.model.Game
 import com.example.madlevel4task2.model.GameResult
@@ -28,27 +30,40 @@ class PlayFragment : Fragment() {
     private var currentGame: Game? = null
     private lateinit var gameHistoryRepository: GameHistoryRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
+    private lateinit var toolbar: Toolbar
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_play, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gameHistoryRepository = GameHistoryRepository(requireContext())
+        navController = findNavController()
         initViews()
     }
 
-    private fun initViews() {
-        mainScope.launch {
-            withContext(Dispatchers.IO) {
-                gameHistoryRepository.deleteGameHistory()
-            }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_goto_history -> {
+            navController.navigate(R.id.action_playFragment_to_gameHistoryFragment)
+            true;
+    }
+        else -> {
+            super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun initViews() {
         setResultVisibility()
         ivThrowPaper.setOnClickListener {
             onClickThrow(Throw.PAPER)
@@ -90,11 +105,11 @@ class PlayFragment : Fragment() {
         }
         ivResultPlayerThrow.setImageResource(Game.getThrowImage(thrown))
         ivResultOpponentThrow.setImageResource(Game.getThrowImage(opponentThrown))
-        currentGame = Game(Date(), thrown, opponentThrown, result)
         setResultVisibility()
+        currentGame = Game(Date(), thrown, opponentThrown, result)
         mainScope.launch {
             withContext(Dispatchers.IO) {
-                gameHistoryRepository.insertIntoGameHistory(Game(Date(), thrown, opponentThrown, result))
+                gameHistoryRepository.insertIntoGameHistory(currentGame!!)
             }
         }
     }

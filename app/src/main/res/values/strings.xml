@@ -10,4 +10,6 @@
     <string name="tvResultLabelYou">You</string>
     <string name="tvResultLabelOpponent">Opponent</string>
     <string name="action_goto_history">View History</string>
+    <string name="action_delete_history">Delete History</string>
+    <string name="action_pop_backstack">Go Back</string>
 </resources>
