@@ -1,11 +1,10 @@
 package com.example.madlevel4task2
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +27,7 @@ class GameHistoryFragment : Fragment() {
     private lateinit var gameHistoryRepository: GameHistoryRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var navController: NavController
 
 
     override fun onCreateView(
@@ -35,14 +35,34 @@ class GameHistoryFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_game_history, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gameHistoryRepository = GameHistoryRepository(requireContext())
+        navController = findNavController()
         getGameHistoryFromDatabase()
         initViews()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_history, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_pop_backstack -> {
+            navController.popBackStack()
+            true;
+        }
+        R.id.action_delete_history -> {
+            deleteGameHistory()
+            true;
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     private fun initViews() {
@@ -68,6 +88,15 @@ class GameHistoryFragment : Fragment() {
             this@GameHistoryFragment.gameHistory.clear()
             this@GameHistoryFragment.gameHistory.addAll(gameHistory)
             this@GameHistoryFragment.gameHistoryAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun deleteGameHistory() {
+        mainScope.launch {
+            withContext(Dispatchers.IO) {
+                gameHistoryRepository.deleteGameHistory()
+            }
+            getGameHistoryFromDatabase()
         }
     }
 
