@@ -1,14 +1,9 @@
 package com.example.madlevel4task2
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.madlevel4task2.model.Game
 import com.example.madlevel4task2.model.GameResult
@@ -19,8 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.Instant
-import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -30,7 +23,6 @@ class PlayFragment : Fragment() {
     private var currentGame: Game? = null
     private lateinit var gameHistoryRepository: GameHistoryRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
-    private lateinit var toolbar: Toolbar
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -49,6 +41,11 @@ class PlayFragment : Fragment() {
         initViews()
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateResultViews(currentGame)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
     }
@@ -56,8 +53,8 @@ class PlayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_goto_history -> {
             navController.navigate(R.id.action_playFragment_to_gameHistoryFragment)
-            true;
-    }
+            true
+        }
         else -> {
             super.onOptionsItemSelected(item)
         }
@@ -95,18 +92,25 @@ class PlayFragment : Fragment() {
         }
     }
 
+    private fun updateResultViews(game: Game?) {
+        if (game != null) {
+            if (game.result != GameResult.DRAW) {
+                tvGameResult.text =
+                    getString(R.string.tvResult, game.result.toString().toLowerCase(Locale.US))
+            } else {
+                tvGameResult.text = getString(R.string.tvResult, "drew")
+            }
+            ivResultPlayerThrow.setImageResource(Game.getThrowImage(game.playerThrow))
+            ivResultOpponentThrow.setImageResource(Game.getThrowImage(game.opponentThrow))
+        }
+    }
+
+
     private fun onClickThrow(thrown: Throw) {
         val opponentThrown = Throw.values().random()
-        val result: GameResult = Game.getResult(thrown, opponentThrown)
-        if (result != GameResult.DRAW) {
-            tvGameResult.text = getString(R.string.tvResult, result.toString().toLowerCase(Locale.US))
-        } else {
-            tvGameResult.text = getString(R.string.tvResult, "drew")
-        }
-        ivResultPlayerThrow.setImageResource(Game.getThrowImage(thrown))
-        ivResultOpponentThrow.setImageResource(Game.getThrowImage(opponentThrown))
+        currentGame = Game(Date(), thrown, opponentThrown, Game.getResult(thrown, opponentThrown))
+        updateResultViews(currentGame)
         setResultVisibility()
-        currentGame = Game(Date(), thrown, opponentThrown, result)
         mainScope.launch {
             withContext(Dispatchers.IO) {
                 gameHistoryRepository.insertIntoGameHistory(currentGame!!)
