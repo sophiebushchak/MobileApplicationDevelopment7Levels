@@ -43,7 +43,7 @@ class PlayFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        updateResultViews(currentGame)
+        setResultVisibility()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -52,6 +52,7 @@ class PlayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_goto_history -> {
+            this.currentGame = null
             navController.navigate(R.id.action_playFragment_to_gameHistoryFragment)
             true
         }
