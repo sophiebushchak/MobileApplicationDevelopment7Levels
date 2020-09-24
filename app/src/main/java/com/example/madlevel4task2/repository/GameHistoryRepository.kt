@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.madlevel4task2.dao.GameDao
 import com.example.madlevel4task2.database.RockPaperScissorsRoomDatabase
 import com.example.madlevel4task2.model.Game
+import com.example.madlevel4task2.model.GameResult
 
 class GameHistoryRepository(context: Context) {
     private val gameDao: GameDao
@@ -27,5 +28,9 @@ class GameHistoryRepository(context: Context) {
 
     suspend fun deleteGameHistory() {
         return gameDao.deleteGameHistory()
+    }
+
+    suspend fun countAResult(gameResult: GameResult): Int {
+        return gameDao.countAResult(gameResult)
     }
 }
