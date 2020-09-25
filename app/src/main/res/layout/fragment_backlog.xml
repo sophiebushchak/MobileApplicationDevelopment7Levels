@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#313233"
-    tools:context=".BacklogFragment" >
+    android:background="@color/colorBackgroundDark"
+    tools:context=".ui.BacklogFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"

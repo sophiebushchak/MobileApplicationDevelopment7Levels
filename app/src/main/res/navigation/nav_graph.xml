@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.madlevel5task2.BacklogFragment"
+        android:name="com.example.madlevel5task2.ui.BacklogFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_backlog">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.madlevel5task2.AddGameFragment"
+        android:name="com.example.madlevel5task2.ui.AddGameFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_add_game">
 
