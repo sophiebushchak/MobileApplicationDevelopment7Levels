@@ -13,5 +13,9 @@
         android:id="@+id/notepadFragment"
         android:name="com.example.madlevel5task1.ui.NotepadFragment"
         android:label="fragment_add_note"
-        tools:layout="@layout/fragment_add_note" />
+        tools:layout="@layout/fragment_add_note" >
+        <action
+            android:id="@+id/action_notepadFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
+    </fragment>
 </navigation>
