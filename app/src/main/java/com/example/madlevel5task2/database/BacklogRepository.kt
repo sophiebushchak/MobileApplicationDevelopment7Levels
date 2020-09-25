@@ -26,7 +26,7 @@ class BacklogRepository(context: Context) {
     suspend fun deleteGameFromBacklog(game: Game) {
         return backlogDao.deleteGameFromBacklog(game)
     }
-    
+
     suspend fun deleteBacklog() {
         return backlogDao.deleteBacklog()
     }
