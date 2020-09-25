@@ -1,4 +1,4 @@
-package com.example.madlevel5example
+package com.example.madlevel5example.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madlevel5example.R
+import com.example.madlevel5example.model.Reminder
+import com.example.madlevel5example.repository.ReminderRepository
 import kotlinx.android.synthetic.main.fragment_reminders.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +25,8 @@ import kotlinx.coroutines.withContext
  */
 class RemindersFragment : Fragment() {
     private val reminders = arrayListOf<Reminder>()
-    private val reminderAdapter = ReminderAdapter(reminders)
+    private val reminderAdapter =
+        ReminderAdapter(reminders)
     private lateinit var reminderRepository: ReminderRepository
 
     override fun onCreateView(
@@ -38,7 +42,10 @@ class RemindersFragment : Fragment() {
         initViews()
         observeAddReminderResult()
 
-        reminderRepository = ReminderRepository(requireContext())
+        reminderRepository =
+            ReminderRepository(
+                requireContext()
+            )
         getRemindersFromDatabase()
     }
 

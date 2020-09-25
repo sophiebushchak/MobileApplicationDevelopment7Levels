@@ -1,9 +1,11 @@
-package com.example.madlevel5example
+package com.example.madlevel5example.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.madlevel5example.dao.ReminderDao
+import com.example.madlevel5example.model.Reminder
 
 @Database(entities = [Reminder::class], version = 1, exportSchema = false)
 abstract class ReminderRoomDatabase : RoomDatabase() {
@@ -22,7 +24,8 @@ abstract class ReminderRoomDatabase : RoomDatabase() {
                     if (reminderRoomDatabaseInstance == null) {
                         reminderRoomDatabaseInstance = Room.databaseBuilder(
                             context.applicationContext,
-                            ReminderRoomDatabase::class.java, DATABASE_NAME
+                            ReminderRoomDatabase::class.java,
+                            DATABASE_NAME
                         )
                             .build()
                     }
