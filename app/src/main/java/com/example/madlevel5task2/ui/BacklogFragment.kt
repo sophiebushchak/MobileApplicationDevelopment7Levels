@@ -7,12 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel5task2.R
+import com.example.madlevel5task2.model.Game
+import kotlinx.android.synthetic.main.fragment_backlog.*
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class BacklogFragment : Fragment() {
+    private val backlog = arrayListOf<Game>()
+    private val backlogAdapter = BacklogAdapter(backlog)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -24,9 +32,20 @@ class BacklogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
+        initViews()
     }
+
+    private fun initViews() {
+        rvBacklog.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        rvBacklog.adapter = backlogAdapter
+        rvBacklog.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        backlog.add(Game("Test", "Xbox", Date()))
+        backlogAdapter.notifyDataSetChanged()
+    }
+
 }
