@@ -33,10 +33,10 @@ abstract class NotepadRoomDatabase : RoomDatabase() {
                             NotepadRoomDatabase::class.java, DATABASE_NAME
                         )
                             .fallbackToDestructiveMigration()
-                            .addCallback(object: RoomDatabase.Callback() {
+                            .addCallback(object : RoomDatabase.Callback() {
                                 override fun onCreate(db: SupportSQLiteDatabase) {
                                     super.onCreate(db)
-                                    INSTANCE?.let {database ->
+                                    INSTANCE?.let { database ->
                                         CoroutineScope(Dispatchers.IO).launch {
                                             database.noteDao().insertNote(Note("Title", Date(), ""))
                                         }
