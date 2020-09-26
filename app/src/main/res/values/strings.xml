@@ -4,4 +4,6 @@
     <string name="action_settings">Settings</string>
     <string name="tvGameReleaseDate">Release: %s</string>
     <string name="action_delete_backlog">Delete Backlog</string>
+    <string name="game_removed">Removed game: %s</string>
+    <string name="undo_string">Undo</string>
 </resources>

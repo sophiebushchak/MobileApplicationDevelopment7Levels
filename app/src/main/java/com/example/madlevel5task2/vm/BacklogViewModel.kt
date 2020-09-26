@@ -33,6 +33,12 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun insertGame(game: Game) {
+        ioScope.launch {
+            backlogRepository.insertGame(game)
+        }
+    }
+
     fun deleteGame(game: Game) {
         ioScope.launch {
             backlogRepository.deleteGameFromBacklog(game)

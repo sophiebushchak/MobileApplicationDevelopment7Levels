@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_backlog.*
 import java.util.*
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -108,9 +109,20 @@ class BacklogFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val gameToDelete = backlog[position]
                 viewModel.deleteGame(gameToDelete)
+                val snackbar = Snackbar.make(rvBacklog,
+                    getString(R.string.game_removed, gameToDelete.title),
+                    Snackbar.LENGTH_SHORT)
+                snackbar.setAction(R.string.undo_string, UndoGameDeleteListener(gameToDelete))
+                snackbar.show()
             }
         }
         return ItemTouchHelper(callback)
+    }
+
+    private inner class UndoGameDeleteListener(val game: Game): View.OnClickListener {
+        override fun onClick(v: View) {
+            viewModel.insertGame(game)
+        }
     }
 
 }
