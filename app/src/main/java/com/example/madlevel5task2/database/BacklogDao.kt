@@ -10,7 +10,7 @@ import com.example.madlevel5task2.model.Game
 @Dao
 interface BacklogDao {
     @Query("SELECT * FROM game_backlog_table")
-    fun getBacklog(): LiveData<Game>
+    fun getBacklog(): LiveData<List<Game>>
 
     @Insert
     suspend fun insertGame(game: Game)
