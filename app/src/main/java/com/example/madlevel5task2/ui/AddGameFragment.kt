@@ -32,10 +32,11 @@ class AddGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
         fabSave.setOnClickListener {
             insertGame()
         }
-        navController = findNavController()
+        observeStatus()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

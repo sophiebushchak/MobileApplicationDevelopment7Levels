@@ -16,7 +16,7 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
     private val mainScope = CoroutineScope(Dispatchers.Main)
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val backlogRepository = BacklogRepository(application.applicationContext)
-    private val backlog: LiveData<List<Game>> = backlogRepository.getBacklog()
+    val backlog: LiveData<List<Game>> = backlogRepository.getBacklog()
 
     val error = MutableLiveData<String>()
     val success = MutableLiveData<Boolean>()
