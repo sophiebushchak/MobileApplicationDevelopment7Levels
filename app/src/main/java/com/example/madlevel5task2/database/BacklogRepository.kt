@@ -15,7 +15,7 @@ class BacklogRepository(context: Context) {
         backlogDao = database!!.backlogDao()
     }
 
-    fun getBacklog(): LiveData<Game> {
+    fun getBacklog(): LiveData<List<Game>> {
         return backlogDao.getBacklog()
     }
 
