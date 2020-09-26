@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +21,7 @@ import java.util.*
 class BacklogFragment : Fragment() {
     private val backlog = arrayListOf<Game>()
     private val backlogAdapter = BacklogAdapter(backlog)
+    private lateinit var navController: NavController
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +34,12 @@ class BacklogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
+        fabAddGame.setOnClickListener {
+            navController.navigate(
+                R.id.action_backlogFragment_to_addGameFragment
+            )
+        }
         initViews()
     }
 
