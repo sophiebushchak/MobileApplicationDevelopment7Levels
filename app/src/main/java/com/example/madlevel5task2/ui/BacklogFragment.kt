@@ -51,7 +51,14 @@ class BacklogFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_delete_backlog -> {
+            val backlogBackup = arrayListOf<Game>()
+            backlogBackup.addAll(backlog)
             viewModel.clearBacklog()
+            val snackbar = Snackbar.make(rvBacklog,
+                R.string.backlog_cleared,
+                Snackbar.LENGTH_SHORT)
+            snackbar.setAction(R.string.undo_string, UndoClearBacklog(backlogBackup))
+            snackbar.show()
             true
         } else -> {
             super.onOptionsItemSelected(item)
@@ -122,6 +129,14 @@ class BacklogFragment : Fragment() {
     private inner class UndoGameDeleteListener(val game: Game): View.OnClickListener {
         override fun onClick(v: View) {
             viewModel.insertGame(game)
+        }
+    }
+
+    private inner class UndoClearBacklog(val backlogToRestore: ArrayList<Game>): View.OnClickListener {
+        override fun onClick(v: View) {
+            for (game in backlogToRestore) {
+                viewModel.insertGame(game)
+            }
         }
     }
 

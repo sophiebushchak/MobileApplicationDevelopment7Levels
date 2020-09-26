@@ -6,4 +6,10 @@
     <string name="action_delete_backlog">Delete Backlog</string>
     <string name="game_removed">Removed game: %s</string>
     <string name="undo_string">Undo</string>
+    <string name="backlog_cleared">Cleared backlog</string>
+    <string name="tfTitleHint">Title</string>
+    <string name="tfPlatformsHint">Platforms</string>
+    <string name="tfReleaseDateDayHint">Day</string>
+    <string name="tfReleaseDateMonthHint">Month</string>
+    <string name="tfReleaseDateYearHint">Year</string>
 </resources>
