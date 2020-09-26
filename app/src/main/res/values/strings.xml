@@ -2,5 +2,6 @@
     <string name="app_name">MadLevel6Example</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-
+    <string name="instructions">Instructions: click the button to get a random number trivia</string>
+    <string name="trivia">Trivia</string>
 </resources>
