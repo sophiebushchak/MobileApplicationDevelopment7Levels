@@ -8,7 +8,7 @@
     tools:context=".ui.AddGameFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/fabSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -48,6 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -67,6 +68,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tfTitle">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPlatforms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -87,6 +89,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tfPlatforms">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReleaseDateDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -106,6 +109,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tfPlatforms">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReleaseDateMonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -126,6 +130,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tfPlatforms">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReleaseDateYear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

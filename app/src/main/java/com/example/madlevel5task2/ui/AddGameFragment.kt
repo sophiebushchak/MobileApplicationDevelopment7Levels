@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.madlevel5task2.R
 import com.example.madlevel5task2.vm.BacklogViewModel
+import kotlinx.android.synthetic.main.fragment_add_game.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -31,6 +32,9 @@ class AddGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fabSave.setOnClickListener {
+            insertGame()
+        }
         navController = findNavController()
     }
 
@@ -58,7 +62,11 @@ class AddGameFragment : Fragment() {
 
     private fun insertGame() {
         viewModel.insertGame(
-
+            etTitle.text.toString(),
+            etPlatforms.text.toString(),
+            etReleaseDateDay.text.toString(),
+            etReleaseDateYear.text.toString(),
+            etReleaseDateMonth.text.toString()
         )
     }
 }
