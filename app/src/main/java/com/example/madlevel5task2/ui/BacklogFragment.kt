@@ -65,8 +65,6 @@ class BacklogFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        backlog.add(Game("Test", "Xbox One, Playstation 4", Date()))
-        backlogAdapter.notifyDataSetChanged()
     }
 
 }
