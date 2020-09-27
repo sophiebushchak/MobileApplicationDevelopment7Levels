@@ -21,6 +21,13 @@ class MainActivity : AppCompatActivity() {
         toolbarState()
     }
 
+    /**
+     * This listens to changes in the current Fragment.
+     * If the Fragment is AddGameFragment, add a back button to the toolbar and set the title to
+     * "Add Game"
+     * If the new Fragment is not AddGameFragment, remove the back button and set the title back to
+     * "Game Backlog"
+     */
     private fun toolbarState() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id in arrayOf(R.id.addGameFragment)) {

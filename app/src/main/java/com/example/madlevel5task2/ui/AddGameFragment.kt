@@ -30,6 +30,9 @@ class AddGameFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_add_game, container, false)
     }
 
+    /**
+     * Sets click listener on the fab to save the currently entered game and triggers [observeStatus]
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
@@ -39,10 +42,16 @@ class AddGameFragment : Fragment() {
         observeStatus()
     }
 
+    /**
+     * Sets the toolbar menu to be an empty menu.
+     */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_add_game, menu)
     }
 
+    /**
+     * Sets what happens when the back arrow is pressed in the toolbar.
+     */
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home -> {
             navController.popBackStack()
@@ -51,6 +60,9 @@ class AddGameFragment : Fragment() {
         }
     }
 
+    /**
+     * Sets observers on the error and success data from the view model.
+     */
     private fun observeStatus() {
         viewModel.error.observe(viewLifecycleOwner, Observer {
             message ->
@@ -61,6 +73,9 @@ class AddGameFragment : Fragment() {
         })
     }
 
+    /**
+     * Inserts the game using the current values in the form fields.
+     */
     private fun insertGame() {
         viewModel.insertGame(
             etTitle.text.toString(),

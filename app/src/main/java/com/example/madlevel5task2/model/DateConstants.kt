@@ -1,5 +1,8 @@
 package com.example.madlevel5task2.model
 
+/**
+ * To handle bad input in the date fields, set up some constants for correct date values.
+ */
 class DateConstants {
     companion object {
         val DAY_MIN = 1

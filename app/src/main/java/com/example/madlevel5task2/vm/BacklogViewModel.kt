@@ -22,6 +22,12 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
     val error = MutableLiveData<String>()
     val success = MutableLiveData<Boolean>()
 
+    /**
+     * Inserts game through String values from the textfields.
+     * It first gets a data from the [returnDateFromFields] method.
+     * Then it passes this date and the title and platform to see if the entered data should be used
+     * to enter a game into the database.
+     */
     fun insertGame(title: String, platform: String, releaseDateDay: String,
                    releaseDateYear: String, releaseDateMonth: String) {
         val date: Date? = returnDateFromFields(releaseDateDay, releaseDateYear, releaseDateMonth)
@@ -33,24 +39,36 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    /**
+     * Alternative [insertGame] method to add a game from an object.
+     */
     fun insertGame(game: Game) {
         ioScope.launch {
             backlogRepository.insertGame(game)
         }
     }
 
+    /**
+     * Deletes a game from the database.
+     */
     fun deleteGame(game: Game) {
         ioScope.launch {
             backlogRepository.deleteGameFromBacklog(game)
         }
     }
 
+    /**
+     * Clears the backlog of games.
+     */
     fun clearBacklog() {
         ioScope.launch {
             backlogRepository.deleteBacklog()
         }
     }
 
+    /**
+     * Checks if 3 values are valid so it can safely be used for a Game object.
+     */
     private fun areFieldsValid(title: String, platform: String, date: Date?): Boolean {
         return when {
             title.isBlank() -> {
@@ -68,6 +86,13 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    /**
+     * Returns either null or a Date object from 3 string values.
+     * It first checks if the entered values fall within the allowed date ranges.
+     * Then it tries to make a Date out of this.
+     * Catching the NumberFormatException is for potentially empty Strings.
+     * Catching the ParseException is for dateStrings that don't result in any Date.
+     */
     private fun returnDateFromFields(releaseDateDay: String, releaseDateYear: String,
                                    releaseDateMonth: String): Date? {
         try {
