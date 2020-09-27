@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/moviesFragment"
-        android:name="com.example.madlevel6task2.MoviesFragment"
+        android:name="com.example.madlevel6task2.ui.MoviesFragment"
         android:label="fragment_movies"
         tools:layout="@layout/fragment_movies" />
 </navigation>
