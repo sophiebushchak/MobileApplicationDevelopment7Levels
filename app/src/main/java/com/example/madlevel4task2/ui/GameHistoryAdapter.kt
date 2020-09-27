@@ -31,6 +31,7 @@ class GameHistoryAdapter(private val games: ArrayList<Game>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun databind(game: Game) {
             itemView.tvHistoryDate.text = game.date.toString()
+            //Make first letter uppercase
             itemView.tvHistoryResult.text = game.result.toString().substring(0, 1) +
                     game.result.toString().toLowerCase(Locale.US).substring(1)
             itemView.ivHistoryPlayerThrow.setImageResource(Game.getThrowImage(game.playerThrow))

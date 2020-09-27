@@ -41,18 +41,19 @@ class PlayFragment : Fragment() {
         initViews()
     }
 
-    override fun onResume() {
-        super.onResume()
-        setResultVisibility()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
     }
 
+    /**
+     * Sets what happens when items in the toolbar menu are pressed.
+     * To be tidy, the last game of Rock Paper Scissors played is removed before leaving the fragment.
+     */
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_goto_history -> {
             this.currentGame = null
+            setResultVisibility()
             navController.navigate(R.id.action_playFragment_to_gameHistoryFragment)
             true
         }
@@ -61,6 +62,10 @@ class PlayFragment : Fragment() {
         }
     }
 
+    /**
+     * Sets click listeners on the 3 buttons for playing the game and sets the game results to invisible.
+     * Also retrieves the statistics.
+     */
     private fun initViews() {
         setResultVisibility()
         ivThrowPaper.setOnClickListener {
@@ -76,6 +81,10 @@ class PlayFragment : Fragment() {
         updateStatisticsView()
     }
 
+    /**
+     * To not display empty images and text before a game is played, sets all the views related to the
+     * game result to invisible when there is no game that was played.
+     */
     private fun setResultVisibility() {
         if (this.currentGame != null) {
             tvGameResult.visibility = View.VISIBLE
@@ -94,6 +103,9 @@ class PlayFragment : Fragment() {
         }
     }
 
+    /**
+     * Updates the views related to the game result with appropriate resources.
+     */
     private fun updateResultViews(game: Game?) {
         if (game != null) {
             if (game.result != GameResult.DRAW) {
@@ -107,6 +119,9 @@ class PlayFragment : Fragment() {
         }
     }
 
+    /**
+     * Retrieves the statistics and updates the related view.
+      */
     private fun updateStatisticsView() {
         mainScope.launch {
             var wins = 0
@@ -121,7 +136,9 @@ class PlayFragment : Fragment() {
         }
     }
 
-
+    /**
+     * Click listener for the game buttons.
+     */
     private fun onClickThrow(thrown: Throw) {
         val opponentThrown = Throw.values().random()
         currentGame = Game(Date(), thrown, opponentThrown, Game.getResult(thrown, opponentThrown))

@@ -51,6 +51,9 @@ class GameHistoryFragment : Fragment() {
         inflater.inflate(R.menu.menu_history, menu)
     }
 
+    /**
+     * Does something based on the action clicked in the toolbar
+     */
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_pop_backstack -> {
             navController.popBackStack()
@@ -65,6 +68,9 @@ class GameHistoryFragment : Fragment() {
         }
     }
 
+    /**
+     * Sets up the RecyclerView
+     */
     private fun initViews() {
         viewManager = LinearLayoutManager(activity)
         rvGameHistory.addItemDecoration(
@@ -80,6 +86,9 @@ class GameHistoryFragment : Fragment() {
         }
     }
 
+    /**
+     * Retrieves Game history from the database
+     */
     private fun getGameHistoryFromDatabase() {
         mainScope.launch {
             val gameHistory = withContext(Dispatchers.IO) {
@@ -91,6 +100,9 @@ class GameHistoryFragment : Fragment() {
         }
     }
 
+    /**
+     * Deletes all Games in the database
+     */
     private fun deleteGameHistory() {
         mainScope.launch {
             withContext(Dispatchers.IO) {

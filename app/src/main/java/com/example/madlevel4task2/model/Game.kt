@@ -3,9 +3,7 @@ package com.example.madlevel4task2.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 import com.example.madlevel4task2.R
-import com.example.madlevel4task2.tools.DateConverters
 import java.util.*
 
 @Entity(tableName = "game_history_table")
@@ -24,6 +22,9 @@ data class Game (
     val result: GameResult
 ) {
     companion object {
+        /**
+         * Returns a corresponding image for a given Throw value
+         */
         public fun getThrowImage(thrown: Throw): Int {
             if (thrown == Throw.PAPER) return R.drawable.paper
             if (thrown == Throw.SCISSORS) return R.drawable.scissors
@@ -31,6 +32,9 @@ data class Game (
             return 1;
         }
 
+        /**
+         * Returns the result of a Rock Paper Scissors match based on the throws
+         */
         public fun getResult(playerThrown: Throw, opponentThrown: Throw): GameResult {
             return if (playerThrown == Throw.PAPER && opponentThrown == Throw.ROCK
                 || playerThrown == Throw.ROCK && opponentThrown == Throw.SCISSORS
