@@ -49,6 +49,10 @@ class BacklogFragment : Fragment() {
         inflater.inflate(R.menu.menu_main, menu)
     }
 
+    /**
+     * Sets the action_delete_backlog in the menu to store the current backlog in a backup,
+     * then removes the current backup and displays a Snackbar menu to give the user a chance to undo.
+     */
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_delete_backlog -> {
             val backlogBackup = arrayListOf<Game>()
@@ -65,6 +69,10 @@ class BacklogFragment : Fragment() {
         }
     }
 
+    /**
+     * Sets up the RecyclerView and adds a click listener to navigate to the AddGameFragment on the
+     * fab.
+     */
     private fun initViews() {
         rvBacklog.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rvBacklog.adapter = backlogAdapter
@@ -82,6 +90,9 @@ class BacklogFragment : Fragment() {
         }
     }
 
+    /**
+     * Listens to changes in the LiveData of the view model.
+     */
     private fun observeBacklogChanges() {
         viewModel.backlog.observe(viewLifecycleOwner, Observer {
             backlog ->
@@ -116,6 +127,7 @@ class BacklogFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val gameToDelete = backlog[position]
                 viewModel.deleteGame(gameToDelete)
+                //Gives user a chance to reverse action.
                 val snackbar = Snackbar.make(rvBacklog,
                     getString(R.string.game_removed, gameToDelete.title),
                     Snackbar.LENGTH_SHORT)
@@ -126,12 +138,20 @@ class BacklogFragment : Fragment() {
         return ItemTouchHelper(callback)
     }
 
+    /**
+     * Listener where a game is passed.
+     * Its purpose is to insert the game back into the backlog after a deletion.
+     */
     private inner class UndoGameDeleteListener(val game: Game): View.OnClickListener {
         override fun onClick(v: View) {
             viewModel.insertGame(game)
         }
     }
 
+    /**
+     * Listener where a list of games is passed.
+     * Its purpose is to insert the backlog backup that was made before clearing the backlog back in.
+     */
     private inner class UndoClearBacklog(val backlogToRestore: ArrayList<Game>): View.OnClickListener {
         override fun onClick(v: View) {
             for (game in backlogToRestore) {
