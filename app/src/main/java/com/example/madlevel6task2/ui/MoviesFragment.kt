@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel6task2.R
 import com.example.madlevel6task2.model.MovieResult
+import com.example.madlevel6task2.vm.MoviesViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_movies.*
 
@@ -20,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_movies.*
 class MoviesFragment : Fragment() {
     private val movies = arrayListOf<MovieResult>()
     private val moviesAdapter = MoviesAdapter(movies, ::onMovieClick)
+    private val viewModel: MoviesViewModel by activityViewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +43,27 @@ class MoviesFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+        btnSubmit.setOnClickListener {
+            onSubmit(etYear.text.toString())
+        }
+        observeMovies()
     }
 
     private fun onMovieClick(movieResult: MovieResult) {
-        Snackbar.make(rvMovies, "Avengers: Infinity War", Snackbar.LENGTH_LONG).show()
+        //TODO
+    }
+
+    private fun observeMovies() {
+        viewModel.movies.observe(viewLifecycleOwner, Observer {
+            movies ->
+            println("Observed movies.")
+            this@MoviesFragment.movies.clear()
+            this@MoviesFragment.movies.addAll(movies)
+            moviesAdapter.notifyDataSetChanged()
+        })
+    }
+
+    private fun onSubmit(year: String) {
+        viewModel.getMovies(year)
     }
 }
