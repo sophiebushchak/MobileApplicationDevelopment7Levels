@@ -67,6 +67,13 @@ class MoviesFragment : Fragment() {
         })
     }
 
+    private fun observeErrors() {
+        viewModel.errorText.observe(viewLifecycleOwner, Observer {
+            error ->
+            this.view?.let { Snackbar.make(it, error, Snackbar.LENGTH_SHORT).show() }
+        })
+    }
+
     private fun onSubmit(year: String) {
         if (year.isNotBlank()) {
             viewModel.getMovies(year)
