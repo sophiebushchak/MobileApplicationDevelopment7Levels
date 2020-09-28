@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +20,9 @@ import com.example.madlevel6task2.vm.MoviesViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_movies.*
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+const val MOVIE_REQUEST_KEY = "req_movie"
+const val MOVIE_REQUEST_BUNDLE = "bundle_movie"
+
 class MoviesFragment : Fragment() {
     private val movies = arrayListOf<MovieResult>()
     private val moviesAdapter = MoviesAdapter(movies, ::onMovieClick)
@@ -50,7 +53,8 @@ class MoviesFragment : Fragment() {
     }
 
     private fun onMovieClick(movieResult: MovieResult) {
-        //TODO
+        setFragmentResult(MOVIE_REQUEST_KEY, bundleOf(Pair(MOVIE_REQUEST_BUNDLE, movieResult)))
+        findNavController().navigate(R.id.action_moviesFragment_to_movieDetailFragment)
     }
 
     private fun observeMovies() {
@@ -64,6 +68,11 @@ class MoviesFragment : Fragment() {
     }
 
     private fun onSubmit(year: String) {
-        viewModel.getMovies(year)
+        if (year.isNotBlank()) {
+            viewModel.getMovies(year)
+        } else {
+            Snackbar.make(etYear, "Please enter a year.", Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 }

@@ -38,7 +38,8 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="95dp"
-            tools:layout_editor_absoluteY="43dp" />
+            tools:layout_editor_absoluteY="43dp"
+            android:inputType="number"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
