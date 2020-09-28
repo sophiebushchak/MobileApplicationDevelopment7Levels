@@ -1,7 +1,10 @@
 package com.example.madlevel6task2.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MovieResult (
     @SerializedName("popularity") val popularity : Double,
     @SerializedName("vote_count") val voteCount : Int,
@@ -17,4 +20,4 @@ data class MovieResult (
     @SerializedName("vote_average") val voteAverage : Double,
     @SerializedName("overview") val overview : String,
     @SerializedName("release_date") val releaseDate : String
-)
+) : Parcelable
