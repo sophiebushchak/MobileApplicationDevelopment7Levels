@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MovieDBApi {
     companion object {
-        // The base url off the api.
         /**
          * @return [MovieDBApiService] The service class off the retrofit client.
          */

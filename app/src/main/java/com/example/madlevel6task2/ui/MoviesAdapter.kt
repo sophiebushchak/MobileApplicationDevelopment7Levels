@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.madlevel6task2.R
 import com.example.madlevel6task2.model.MovieResult
+import com.example.madlevel6task2.rest.MovieDBConfig
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class MoviesAdapter(private val movies: List<MovieResult>, private val onClick: (MovieResult) -> Unit) :
@@ -33,7 +34,7 @@ class MoviesAdapter(private val movies: List<MovieResult>, private val onClick: 
         }
 
         fun bind(movie: MovieResult) {
-            Glide.with(context).load(movie.posterPath).into(itemView.ivImagePoster)
+            Glide.with(context).load(MovieDBConfig.IMAGE_BASE_URL + movie.posterPath).into(itemView.ivImagePoster)
             itemView.tvMovieTitle.text = movie.title
             itemView.tvPosition.text = (movies.indexOf(movie) + 1).toString() + "."
         }
