@@ -8,8 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MovieDBApi {
     companion object {
         // The base url off the api.
-        private const val baseUrl = "https://api.themoviedb.org/3/"
-
         /**
          * @return [MovieDBApiService] The service class off the retrofit client.
          */
@@ -21,7 +19,7 @@ class MovieDBApi {
 
             // Create the Retrofit instance
             val triviaApi = Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(MovieDBConfig.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

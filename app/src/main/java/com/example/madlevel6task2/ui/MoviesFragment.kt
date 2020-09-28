@@ -39,7 +39,6 @@ class MoviesFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
-        movies.add(MovieResult("Sweeney Todd: The Demon Barber Of Fleet Street"))
     }
 
     private fun onMovieClick(movieResult: MovieResult) {
