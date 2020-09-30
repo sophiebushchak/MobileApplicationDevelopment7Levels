@@ -34,9 +34,11 @@ class MoviesAdapter(private val movies: List<MovieResult>, private val onClick: 
         }
 
         fun bind(movie: MovieResult) {
-            Glide.with(context).load(MovieDBConfig.IMAGE_BASE_URL + movie.posterPath).into(itemView.ivImagePoster)
-            itemView.tvMovieTitle.text = movie.title
-            itemView.tvPosition.text = (movies.indexOf(movie) + 1).toString() + "."
+            Glide.with(context).load(MovieDBConfig.IMAGE_BASE_URL + movie.posterPath).into(itemView.ivItemImagePoster)
+            itemView.tvItemTitle.text = movie.title
+            itemView.tvItemPosition.text = (movies.indexOf(movie) + 1).toString() + "."
+            itemView.tvItemDate.text = movie.releaseDate
+            itemView.tvItemStarRating.text = movie.voteAverage.toString()
         }
     }
 
