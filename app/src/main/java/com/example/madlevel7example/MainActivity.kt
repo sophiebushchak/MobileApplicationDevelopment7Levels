@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        FirebaseFirestore.setLoggingEnabled(true)
+        FirebaseFirestore.setLoggingEnabled(false)
         FirebaseApp.initializeApp(this)
     }
 

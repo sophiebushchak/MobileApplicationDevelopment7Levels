@@ -1,5 +1,6 @@
 package com.example.madlevel7example
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,10 +31,14 @@ class QuizRepository {
                 val data = quizDocument
                     .get()
                     .await()
-                val question = data.getString("question").toString()
-                val answer = data.getString("answer").toString()
-
-                _quiz.value = Quiz(question, answer)
+                val question = data.getString("question")
+                val answer = data.getString("answer")
+                println("QuizRepository: Retrieved a quiz.")
+                println(data.getString("question"))
+                println(data.getString("answer"))
+                if (question != null && answer != null) {
+                    _quiz.value = Quiz(question, answer)
+                }
             }
         }
         catch (e: Exception) {
