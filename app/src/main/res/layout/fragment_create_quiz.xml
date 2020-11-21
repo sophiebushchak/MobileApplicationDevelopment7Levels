@@ -7,7 +7,7 @@
     tools:context=".CreateQuizFragment">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvCreateQuiz"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,9 +31,9 @@
         android:inputType="text"
         android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/etAnswer"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintEnd_toEndOf="@+id/tvCreateQuiz"
+        app:layout_constraintStart_toStartOf="@+id/tvCreateQuiz"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreateQuiz" />
 
     <EditText
         android:id="@+id/etAnswer"
