@@ -7,23 +7,25 @@
     tools:context=".QuizFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvQuestionIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="1/10" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvQuestionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/answerOptionsRadioGroup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestionIndicator"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Who is the co-founder of Android?" />
 
@@ -35,24 +37,27 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmAnswer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestionText">
 
         <RadioButton
             android:id="@+id/rbAnswerFirst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             tools:text="Andy Rubin" />
 
         <RadioButton
             android:id="@+id/rbAnswerSecond"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             tools:text="Larry Page &amp; Sergey Brin" />
 
         <RadioButton
             android:id="@+id/rbAnswerThird"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             tools:text="Sundar Pichai" />
     </RadioGroup>
 
@@ -64,6 +69,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btnConfirmAnswer"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
