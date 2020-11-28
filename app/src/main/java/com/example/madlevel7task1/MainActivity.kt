@@ -15,10 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            FirebaseFirestore.setLoggingEnabled(true)
-            FirebaseApp.initializeApp(this)
-            findNavController(R.id.nav_host_fragment_container).navigate(R.id.createProfileFragment)
-        }
+        FirebaseFirestore.setLoggingEnabled(true)
+        FirebaseApp.initializeApp(this)
     }
 }
