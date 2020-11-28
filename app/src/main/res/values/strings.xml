@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MadLevel7Task1</string>
+    <string name="tvSplashText">User Profile Kotlin</string>
 </resources>
