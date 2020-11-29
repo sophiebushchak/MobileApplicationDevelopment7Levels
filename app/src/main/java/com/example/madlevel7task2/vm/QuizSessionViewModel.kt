@@ -14,6 +14,4 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
     fun startQuizSession(quiz: Quiz) {
         _quizSession.value = QuizSession(quiz)
     }
-
-    fun
 }

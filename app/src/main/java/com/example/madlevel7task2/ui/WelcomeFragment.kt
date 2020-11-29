@@ -5,19 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.madlevel7task2.R
 import com.example.madlevel7task2.vm.QuizSessionViewModel
 import com.example.madlevel7task2.vm.QuizViewModel
 import kotlinx.android.synthetic.main.fragment_welcome.*
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+const val QUIZ_REQUEST_KEY = "req_quiz"
+const val QUIZ_REQUEST_BUNDLE = "bundle_quiz"
 class WelcomeFragment : Fragment() {
     private val quizViewModel: QuizViewModel by activityViewModels()
-    private val quizSessionViewModel: QuizSessionViewModel by activityViewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +39,9 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun onClickStart() {
-
+        val quizToStart = quizViewModel.quiz.value
+        setFragmentResult(QUIZ_REQUEST_KEY, bundleOf(Pair(QUIZ_REQUEST_BUNDLE, quizToStart)))
+        findNavController().navigate(R.id.action_welcomeFragment_to_quizFragment)
     }
 
     private fun observeQuiz() {
