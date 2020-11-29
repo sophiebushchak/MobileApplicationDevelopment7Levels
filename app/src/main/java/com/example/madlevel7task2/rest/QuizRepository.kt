@@ -1,12 +1,16 @@
 package com.example.madlevel7task2.rest
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.madlevel7task2.model.Quiz
+import com.example.madlevel7task2.model.QuizQuestion
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.getField
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeout
 import java.lang.Exception
+import java.lang.reflect.GenericArrayType
 
 class QuizRepository {
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -27,11 +31,12 @@ class QuizRepository {
                 val data = quizDocument
                     .get()
                     .await()
+                val quiz = data.toObject(Quiz::class.java)
 
-                println(data)
+                _quiz.value = quiz
             }
         } catch (e: Exception) {
-            throw QuizRetrievalError("Retrieval-firebase-task was unsuccessful")
+            throw QuizRetrievalError(e.message.toString())
         }
     }
 

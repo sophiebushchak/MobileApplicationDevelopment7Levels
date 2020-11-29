@@ -5,12 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.madlevel7task2.R
+import com.example.madlevel7task2.vm.QuizSessionViewModel
+import com.example.madlevel7task2.vm.QuizViewModel
+import kotlinx.android.synthetic.main.fragment_welcome.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class WelcomeFragment : Fragment() {
+    private val quizViewModel: QuizViewModel by activityViewModels()
+    private val quizSessionViewModel: QuizSessionViewModel by activityViewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +29,23 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeQuiz()
+        quizViewModel.createQuiz()
+        quizViewModel.getQuiz()
+        btnStartQuest.setOnClickListener {
+            onClickStart()
+        }
+    }
 
+    private fun onClickStart() {
+
+    }
+
+    private fun observeQuiz() {
+        quizViewModel.quiz.observe(viewLifecycleOwner, Observer {
+            val quiz = it
+            tvWelcomeTitle.text = quiz.quizName
+            tvWelcomeDescription.text = quiz.quizDescription
+        })
     }
 }
