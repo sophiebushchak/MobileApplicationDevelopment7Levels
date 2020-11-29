@@ -3,26 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/welcomeFragment">
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/welcomeFragment"
         android:name="com.example.madlevel7task2.ui.WelcomeFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_welcome">
-
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_welcomeFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/quizFragment"
         android:name="com.example.madlevel7task2.ui.QuizFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_quiz">
-
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_quizFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
 </navigation>

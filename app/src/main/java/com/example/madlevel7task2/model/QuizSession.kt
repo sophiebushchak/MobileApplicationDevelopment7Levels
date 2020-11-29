@@ -25,7 +25,7 @@ class QuizSession(private val quiz: Quiz) {
     }
 
     fun getCurrentQuestionNumber(): Int {
-        return this.currentQuestionIndex
+        return this.currentQuestionIndex+1
     }
 
     fun getTotalQuestionNumber(): Int {

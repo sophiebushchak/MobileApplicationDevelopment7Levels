@@ -1,6 +1,10 @@
 package com.example.madlevel7task2.model
 
-class Quiz() {
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class Quiz() : Parcelable {
     var quizName: String = ""
     var quizDescription: String = ""
     var quizQuestions: MutableList<QuizQuestion> = mutableListOf()
