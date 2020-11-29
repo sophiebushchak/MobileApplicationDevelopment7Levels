@@ -1,10 +1,16 @@
 package com.example.madlevel7task2.model
 
-class Quiz(
-    val quizName: String,
-    val quizDescription: String,
-    private val quizQuestions: MutableList<QuizQuestion> = mutableListOf()
-) {
+class Quiz() {
+    var quizName: String = ""
+    var quizDescription: String = ""
+    var quizQuestions: MutableList<QuizQuestion> = mutableListOf()
+
+    constructor(quizName: String,
+                quizDescription: String) : this() {
+        this.quizName = quizName
+        this.quizDescription = quizDescription
+    }
+
     fun getQuestionAtIndex(index: Int): QuizQuestion {
         return quizQuestions[index]
     }
@@ -19,5 +25,39 @@ class Quiz(
 
     fun getQuestions(): List<QuizQuestion> {
         return this.quizQuestions.toList()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Quiz
+
+        if (quizName != other.quizName) return false
+        if (quizDescription != other.quizDescription) return false
+        if (quizQuestions != other.quizQuestions) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = quizName.hashCode()
+        result = 31 * result + quizDescription.hashCode()
+        result = 31 * result + quizQuestions.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        val string = StringBuilder()
+            .appendln("Quiz with name: $quizName")
+            .appendln("Quiz with description: $quizDescription")
+            .appendln("Quiz with questions:")
+
+        for (question in quizQuestions) {
+            string.appendln("-----------------------")
+            string.appendln("$question")
+        }
+
+        return string.toString()
     }
 }

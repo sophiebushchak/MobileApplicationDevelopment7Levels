@@ -7,6 +7,7 @@ import android.view.MenuItem
 import com.example.madlevel7task2.R
 import com.example.madlevel7task2.rest.QuizRepository
 import com.example.madlevel7task2.tools.MakeExampleQuiz
+import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,8 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
-        val quizRepository = QuizRepository();
-
+        FirebaseApp.initializeApp(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
