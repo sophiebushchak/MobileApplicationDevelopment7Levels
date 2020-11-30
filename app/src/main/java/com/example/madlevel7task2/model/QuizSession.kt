@@ -2,7 +2,7 @@ package com.example.madlevel7task2.model
 
 class QuizSession(private val quiz: Quiz) {
     private val answers: MutableMap<QuizQuestion, QuizAnswer?> = mutableMapOf()
-    private val currentQuestionIndex: Int = 0
+    private var currentQuestionIndex: Int = 0
 
     init {
         for (quizQuestion: QuizQuestion in quiz.getQuestions()) {
@@ -11,12 +11,14 @@ class QuizSession(private val quiz: Quiz) {
     }
 
     fun answerQuestion(quizAnswer: QuizAnswer, quizQuestion: QuizQuestion) {
-        if (answers.containsKey(quizQuestion)) {
-            println("Updating answer for question: ${quizQuestion.quizQuestionText}")
-            answers[quizQuestion] = quizAnswer
-        } else {
-            println("Inserting answer for question: ${quizQuestion.quizQuestionText}")
-            answers[quizQuestion] = quizAnswer
+        println("Answer for question: ${quizQuestion.quizQuestionText} = ${quizAnswer.answerText}")
+        answers[quizQuestion] = quizAnswer
+        println(countCorrect())
+    }
+
+    fun advanceCurrentQuestion() {
+        if (this.currentQuestionIndex < this.quiz.quizQuestions.size - 1) {
+            this.currentQuestionIndex += 1
         }
     }
 
@@ -25,7 +27,7 @@ class QuizSession(private val quiz: Quiz) {
     }
 
     fun getCurrentQuestionNumber(): Int {
-        return this.currentQuestionIndex+1
+        return this.currentQuestionIndex + 1
     }
 
     fun getTotalQuestionNumber(): Int {
