@@ -11,6 +11,7 @@ import android.widget.RadioGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.madlevel7task2.R
 import com.example.madlevel7task2.model.Quiz
 import com.example.madlevel7task2.model.QuizSession
@@ -35,7 +36,6 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeQuizSession()
-        observeReceivedQuiz()
         initializeViews()
     }
 
@@ -72,19 +72,16 @@ class QuizFragment : Fragment() {
         }
     }
 
-    private fun observeReceivedQuiz() {
-        setFragmentResultListener(QUIZ_REQUEST_KEY) {_, bundle ->
-            bundle.getParcelable<Quiz>(QUIZ_REQUEST_BUNDLE)?.let {
-                quizSessionViewModel.startQuizSession(it)
-            }
-        }
-    }
-
     private fun observeQuizSession() {
         quizSessionViewModel.quizSession.observe(viewLifecycleOwner, Observer {
             updateViews(
                 it
             )
+        })
+        quizSessionViewModel.sessionOver.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                findNavController().popBackStack()
+            }
         })
     }
 }

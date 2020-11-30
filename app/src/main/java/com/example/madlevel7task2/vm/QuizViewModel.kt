@@ -36,7 +36,6 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun createQuiz() {
-        // persist data to firestore
         val quiz = MakeExampleQuiz.getAQuiz()
         viewModelScope.launch {
             try {
