@@ -16,7 +16,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     private val TAG = "FIRESTORE"
     private val quizRepository: QuizRepository = QuizRepository()
 
-    val quiz: LiveData<List<Quiz>> = quizRepository.quiz
+    val quizzes: LiveData<List<Quiz>> = quizRepository.quiz
 
     val createSuccess: LiveData<Boolean> = quizRepository.createSucces
 
