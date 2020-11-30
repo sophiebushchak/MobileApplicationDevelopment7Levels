@@ -31,7 +31,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        quizViewModel.createQuiz()
+        quizViewModel.createQuizzes()
         quizViewModel.getQuiz()
         observeQuiz()
         btnStartQuest.setOnClickListener {
@@ -45,8 +45,8 @@ class WelcomeFragment : Fragment() {
 
     private fun observeQuiz() {
         quizViewModel.quiz.observe(viewLifecycleOwner, Observer {
-            val quiz = it
-            quizSessionViewModel.startQuizSession(it)
+            val quiz = it[0]
+            quizSessionViewModel.startQuizSession(it[0])
             tvWelcomeTitle.text = quiz.quizName
             tvWelcomeDescription.text = quiz.quizDescription
         })

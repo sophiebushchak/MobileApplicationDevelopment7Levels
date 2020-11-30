@@ -3,6 +3,7 @@ package com.example.madlevel7task2.rest
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.madlevel7task2.helper.QuizzesWrapper
 import com.example.madlevel7task2.model.Quiz
 import com.example.madlevel7task2.model.QuizQuestion
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,11 +15,11 @@ import java.lang.reflect.GenericArrayType
 
 class QuizRepository {
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private var quizDocument = firestore.collection("quests").document("quiz")
+    private var quizDocument = firestore.collection("quests2").document("quizzes")
 
-    private val _quiz: MutableLiveData<Quiz> = MutableLiveData()
+    private val _quiz: MutableLiveData<List<Quiz>> = MutableLiveData()
 
-    val quiz: LiveData<Quiz>
+    val quiz: LiveData<List<Quiz>>
         get() = _quiz
 
     private val _createSuccess: MutableLiveData<Boolean> = MutableLiveData()
@@ -31,26 +32,28 @@ class QuizRepository {
                 val data = quizDocument
                     .get()
                     .await()
-                val quiz = data.toObject(Quiz::class.java)
+                val quiz = data.toObject(QuizzesWrapper::class.java)
 
-                _quiz.value = quiz
+                if (quiz != null) {
+                    _quiz.value = quiz.quizzes
+                }
             }
         } catch (e: Exception) {
-            throw QuizRetrievalError(e.message.toString())
+            throw QuizRetrievalError("Get Error:" + e.message.toString())
         }
     }
 
-    suspend fun createQuiz(quiz: Quiz) {
+    suspend fun createQuiz(quizzes: QuizzesWrapper) {
         try {
             withTimeout(5_000) {
                 quizDocument
-                    .set(quiz)
+                    .set(quizzes)
                     .await()
 
                 _createSuccess.value = true
             }
         } catch (e: Exception) {
-            throw QuizSaveError(e.message.toString(), e)
+            throw QuizSaveError("Create Error: " + e.message.toString(), e)
         }
     }
 
