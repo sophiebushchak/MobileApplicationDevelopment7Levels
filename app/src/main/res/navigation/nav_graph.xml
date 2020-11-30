@@ -22,5 +22,26 @@
         android:id="@+id/startFragment"
         android:name="com.example.madlevel7task2.StartFragment"
         android:label="fragment_start"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_chooseQuestFragment"
+            app:destination="@id/chooseQuestFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_createQuestFragment"
+            app:destination="@id/createQuestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseQuestFragment"
+        android:name="com.example.madlevel7task2.ChooseQuestFragment"
+        android:label="fragment_choose_quest"
+        tools:layout="@layout/fragment_choose_quest" >
+        <action
+            android:id="@+id/action_chooseQuestFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createQuestFragment"
+        android:name="com.example.madlevel7task2.CreateQuestFragment"
+        android:label="fragment_create_quest"
+        tools:layout="@layout/fragment_create_quest" />
 </navigation>
