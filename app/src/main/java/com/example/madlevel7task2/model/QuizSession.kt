@@ -1,6 +1,6 @@
 package com.example.madlevel7task2.model
 
-class QuizSession(private val quiz: Quiz) {
+class QuizSession(val quiz: Quiz) {
     private val answers: MutableMap<QuizQuestion, QuizAnswer?> = mutableMapOf()
     private var currentQuestionIndex: Int = 0
 
