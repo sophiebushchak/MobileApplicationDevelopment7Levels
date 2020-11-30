@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.madlevel7task2.helper.QuizzesWrapper
 import com.example.madlevel7task2.model.Quiz
 import com.example.madlevel7task2.rest.QuizRepository
 import com.example.madlevel7task2.tools.MakeExampleQuiz
@@ -15,7 +16,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     private val TAG = "FIRESTORE"
     private val quizRepository: QuizRepository = QuizRepository()
 
-    val quiz: LiveData<Quiz> = quizRepository.quiz
+    val quiz: LiveData<List<Quiz>> = quizRepository.quiz
 
     val createSuccess: LiveData<Boolean> = quizRepository.createSucces
 
@@ -35,11 +36,13 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun createQuiz() {
+    fun createQuizzes() {
         val quiz = MakeExampleQuiz.getAQuiz()
+        val wrapper = QuizzesWrapper()
+        wrapper.quizzes.add(quiz)
         viewModelScope.launch {
             try {
-                quizRepository.createQuiz(quiz)
+                quizRepository.createQuiz(wrapper)
             } catch (ex: QuizRepository.QuizSaveError) {
                 val errorMsg = "Something went wrong while saving quiz"
                 Log.e(TAG, ex.message ?: errorMsg)
