@@ -33,7 +33,7 @@ class MakeExampleQuiz {
                         answer2,
                         answer3
                     ),
-                    answer2)
+                    answer3)
             )
             answer1 = QuizAnswer("Bear")
             answer2 = QuizAnswer("Rabbit")

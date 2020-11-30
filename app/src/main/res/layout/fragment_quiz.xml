@@ -50,29 +50,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmAnswer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvQuestionText">
-
-        <RadioButton
-            android:id="@+id/rbAnswerFirst"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="Andy Rubin" />
-
-        <RadioButton
-            android:id="@+id/rbAnswerSecond"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="Larry Page &amp; Sergey Brin" />
-
-        <RadioButton
-            android:id="@+id/rbAnswerThird"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="Sundar Pichai" />
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestionText"/>
 
     <Button
         android:id="@+id/btnConfirmAnswer"
