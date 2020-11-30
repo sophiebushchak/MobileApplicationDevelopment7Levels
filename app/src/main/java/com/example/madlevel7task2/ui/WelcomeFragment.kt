@@ -19,6 +19,7 @@ const val QUIZ_REQUEST_KEY = "req_quiz"
 const val QUIZ_REQUEST_BUNDLE = "bundle_quiz"
 class WelcomeFragment : Fragment() {
     private val quizViewModel: QuizViewModel by activityViewModels()
+    private val quizSessionViewModel: QuizSessionViewModel by activityViewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -30,23 +31,22 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeQuiz()
         quizViewModel.createQuiz()
         quizViewModel.getQuiz()
+        observeQuiz()
         btnStartQuest.setOnClickListener {
             onClickStart()
         }
     }
 
     private fun onClickStart() {
-        val quizToStart = quizViewModel.quiz.value
-        setFragmentResult(QUIZ_REQUEST_KEY, bundleOf(Pair(QUIZ_REQUEST_BUNDLE, quizToStart)))
         findNavController().navigate(R.id.action_welcomeFragment_to_quizFragment)
     }
 
     private fun observeQuiz() {
         quizViewModel.quiz.observe(viewLifecycleOwner, Observer {
             val quiz = it
+            quizSessionViewModel.startQuizSession(it)
             tvWelcomeTitle.text = quiz.quizName
             tvWelcomeDescription.text = quiz.quizDescription
         })

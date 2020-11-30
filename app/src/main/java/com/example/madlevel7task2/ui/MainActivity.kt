@@ -4,13 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.activityViewModels
 import com.example.madlevel7task2.R
 import com.example.madlevel7task2.rest.QuizRepository
 import com.example.madlevel7task2.tools.MakeExampleQuiz
+import com.example.madlevel7task2.vm.QuizViewModel
 import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

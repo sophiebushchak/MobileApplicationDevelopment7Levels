@@ -51,5 +51,29 @@ class QuizSession(private val quiz: Quiz) {
     fun getQuizDescription(): String {
         return quiz.quizDescription
     }
+
+    override fun toString(): String {
+        return "QuizSession with current question: ${getCurrentQuestionNumber()}\nWith correct: ${countCorrect()}"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as QuizSession
+
+        if (quiz != other.quiz) return false
+        if (answers != other.answers) return false
+        if (currentQuestionIndex != other.currentQuestionIndex) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = quiz.hashCode()
+        result = 31 * result + answers.hashCode()
+        result = 31 * result + currentQuestionIndex
+        return result
+    }
 }
 
