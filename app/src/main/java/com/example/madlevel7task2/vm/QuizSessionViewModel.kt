@@ -10,12 +10,15 @@ import com.example.madlevel7task2.model.QuizSession
 
 class QuizSessionViewModel(application: Application) : AndroidViewModel(application) {
     private val _quizSession: MutableLiveData<QuizSession> = MutableLiveData()
+    private val _sessionOver: MutableLiveData<Boolean> = MutableLiveData()
+    val sessionOver: LiveData<Boolean> get() = _sessionOver
     val quizSession: LiveData<QuizSession> get() = _quizSession
-    lateinit var currentSession: QuizSession;
+    private lateinit var currentSession: QuizSession
 
     fun startQuizSession(quiz: Quiz) {
+        _sessionOver.value = false;
         currentSession = QuizSession(quiz)
-        broadcastSessionChanged()
+        broadcastSession()
     }
 
     fun answerQuestion(answerText: String) {
@@ -28,11 +31,23 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
         if (quizAnswer != null) {
             currentSession.answerQuestion(quizAnswer, currentSession.getCurrentQuestion())
         }
-        currentSession.advanceCurrentQuestion()
-        broadcastSessionChanged()
+        if (currentSession.getCurrentQuestionNumber() == currentSession.getTotalQuestionNumber()) {
+            finishSession()
+
+        } else {
+            currentSession.advanceCurrentQuestion()
+            broadcastSession()
+        }
+
     }
 
-    private fun broadcastSessionChanged() {
+    private fun finishSession() {
+        _sessionOver.value = true
+        broadcastSession()
+    }
+
+    private fun broadcastSession() {
         _quizSession.value = currentSession
+        println(currentSession)
     }
 }
