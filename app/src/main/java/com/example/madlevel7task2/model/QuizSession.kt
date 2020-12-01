@@ -16,6 +16,12 @@ class QuizSession(val quiz: Quiz) {
         println(countCorrect())
     }
 
+    fun decrementCurrentQuestion() {
+        if (this.currentQuestionIndex != 0) {
+            this.currentQuestionIndex -= 1
+        }
+    }
+
     fun advanceCurrentQuestion() {
         if (this.currentQuestionIndex < this.quiz.quizQuestions.size - 1) {
             this.currentQuestionIndex += 1

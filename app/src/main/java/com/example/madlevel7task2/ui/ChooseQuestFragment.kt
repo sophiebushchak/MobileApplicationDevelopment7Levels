@@ -16,7 +16,6 @@ import com.example.madlevel7task2.R
 import com.example.madlevel7task2.model.Quiz
 import com.example.madlevel7task2.vm.QuizViewModel
 import kotlinx.android.synthetic.main.fragment_choose_quest.*
-import kotlinx.android.synthetic.main.fragment_create_quest.*
 
 const val QUIZ_REQUEST_KEY = "req_quiz"
 const val QUIZ_REQUEST_BUNDLE = "bundle_quiz"

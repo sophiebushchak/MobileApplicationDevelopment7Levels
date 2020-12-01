@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.activity.addCallback
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.madlevel7task2.R
 import com.example.madlevel7task2.model.QuizSession
 import com.example.madlevel7task2.vm.QuizSessionViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_quiz.*
 
 /**
@@ -24,6 +26,14 @@ class QuizFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            if (viewModel.isOnFirstQuestion()) {
+                viewModel.finishSession()
+            } else {
+                viewModel.decrementQuestion()
+            }
+        }
+        callback.isEnabled = true
         return inflater.inflate(R.layout.fragment_quiz, container, false)
     }
 
@@ -33,17 +43,20 @@ class QuizFragment : Fragment() {
         initializeViews()
     }
 
+
     private fun initializeViews() {
         btnConfirmAnswer.setOnClickListener {
             confirmAnswer()
         }
-        answerOptionsRadioGroup.check(0)
     }
 
     private fun confirmAnswer() {
         val rbChosenId = answerOptionsRadioGroup.checkedRadioButtonId
-        val rb: RadioButton = answerOptionsRadioGroup.findViewById(rbChosenId)
-        viewModel.answerQuestion(rb.text.toString())
+        val rb: RadioButton? = answerOptionsRadioGroup.findViewById(rbChosenId)
+        rb?.let {
+            viewModel.answerQuestion(it.text.toString())
+        } ?: viewModel.answerQuestion("")
+        answerOptionsRadioGroup.clearCheck()
     }
 
     private fun updateViews(quizSession: QuizSession) {
@@ -76,6 +89,9 @@ class QuizFragment : Fragment() {
             if (it != null) {
                 findNavController().popBackStack()
             }
+        })
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            Snackbar.make(answerOptionsRadioGroup, it, 500).show()
         })
     }
 }

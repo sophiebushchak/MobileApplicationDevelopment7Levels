@@ -63,7 +63,7 @@ class WelcomeFragment : Fragment() {
                     tvWelcomeTitle,
                     "Completed Quiz ${it.getQuizTitle()} with ${it.countCorrect()} " +
                             "out of ${it.getTotalQuestionNumber()} correct.",
-                    Snackbar.LENGTH_SHORT
+                    500
                 ).show()
                 viewModel.clearAll()
             } ?: Log.e("WelcomeFragment", "Session is not over.")

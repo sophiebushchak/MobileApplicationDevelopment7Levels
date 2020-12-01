@@ -5,11 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.madlevel7task2.R
+import com.example.madlevel7task2.vm.QuizViewModel
 import kotlinx.android.synthetic.main.fragment_start.*
 
 class StartFragment : Fragment() {
+    private val viewModel: QuizViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -32,7 +36,7 @@ class StartFragment : Fragment() {
             findNavController().navigate(R.id.action_startFragment_to_chooseQuestFragment)
         }
         btnCreate.setOnClickListener {
-            findNavController().navigate(R.id.action_startFragment_to_createQuestFragment)
+            viewModel.createQuizzes()
         }
     }
 }
