@@ -37,14 +37,18 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun createQuizzes() {
-        val quiz = MakeExampleQuiz.getAQuiz()
         val wrapper = QuizzesWrapper()
-        wrapper.quizzes.add(quiz)
+        wrapper.quizzes.add(MakeExampleQuiz.getAQuiz())
+        wrapper.quizzes.add(MakeExampleQuiz.getAnotherQuiz())
+        wrapper.quizzes.add(MakeExampleQuiz.getAnotherQuiz())
+        wrapper.quizzes.add(MakeExampleQuiz.getAnotherQuiz())
+        wrapper.quizzes.add(MakeExampleQuiz.getAnotherQuiz())
+        wrapper.quizzes.add(MakeExampleQuiz.getAnotherQuiz())
         viewModelScope.launch {
             try {
                 quizRepository.createQuiz(wrapper)
             } catch (ex: QuizRepository.QuizSaveError) {
-                val errorMsg = "Something went wrong while saving quiz"
+                val errorMsg = "Something went wrong while saving quizzes."
                 Log.e(TAG, ex.message ?: errorMsg)
                 _errorText.value = errorMsg
             }
