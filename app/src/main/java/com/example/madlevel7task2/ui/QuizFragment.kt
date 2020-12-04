@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.activity.addCallback
+import androidx.core.view.iterator
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -63,8 +64,8 @@ class QuizFragment : Fragment() {
         tvQuizIndicator.text = quizSession.getQuizTitle()
         tvQuestionIndicator.text = "${quizSession.getCurrentQuestionNumber()}/${quizSession.getTotalQuestionNumber()}"
         tvQuestionText.text = quizSession.getCurrentQuestion().quizQuestionText
-        fillRadioGroup(quizSession);
-    }
+        fillRadioGroup(quizSession)
+   }
 
     private fun fillRadioGroup(quizSession: QuizSession) {
         val radioGroup = answerOptionsRadioGroup
@@ -74,6 +75,9 @@ class QuizFragment : Fragment() {
             val rb = RadioButton(requireContext());
             rb.text = quizAnswer.answerText
             rb.id = radioButtonIncrements
+            if (quizAnswer == viewModel.getPreviousAnswerForCurrentQuestion()) {
+                rb.isChecked = true
+            }
             radioGroup.addView(rb)
             radioButtonIncrements += 1
         }
@@ -81,9 +85,11 @@ class QuizFragment : Fragment() {
 
     private fun observeQuizSession() {
         viewModel.quizSession.observe(viewLifecycleOwner, Observer {
-            updateViews(
-                it
-            )
+            it?.let {
+                updateViews(
+                    it
+                )
+            }
         })
         viewModel.sessionOver.observe(viewLifecycleOwner, Observer {
             if (it != null) {
@@ -91,7 +97,9 @@ class QuizFragment : Fragment() {
             }
         })
         viewModel.error.observe(viewLifecycleOwner, Observer {
-            Snackbar.make(answerOptionsRadioGroup, it, 500).show()
+            it?.let{
+                Snackbar.make(answerOptionsRadioGroup, it, 500).show()
+            }
         })
     }
 }

@@ -32,6 +32,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
                 val errorMsg = "Something went wrong while retrieving quiz"
                 Log.e(TAG, ex.message ?: errorMsg)
                 _errorText.value = errorMsg
+                _errorText.value = null
             }
         }
     }
@@ -48,7 +49,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 quizRepository.createQuiz(wrapper)
             } catch (ex: QuizRepository.QuizSaveError) {
-                val errorMsg = "Something went wrong while saving quizzes."
+                val errorMsg = "Something went wrong while creating quizzes."
                 Log.e(TAG, ex.message ?: errorMsg)
                 _errorText.value = errorMsg
             }
