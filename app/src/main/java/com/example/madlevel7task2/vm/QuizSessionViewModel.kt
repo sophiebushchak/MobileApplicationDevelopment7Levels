@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.madlevel7task2.model.Quiz
 import com.example.madlevel7task2.model.QuizAnswer
+import com.example.madlevel7task2.model.QuizQuestion
 import com.example.madlevel7task2.model.QuizSession
 
 class QuizSessionViewModel(application: Application) : AndroidViewModel(application) {
@@ -19,6 +20,7 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
 
     fun startQuizSession(quiz: Quiz) {
         _sessionOver.value = null
+        _error.value = null
         currentSession = QuizSession(quiz)
         broadcastSession()
     }
@@ -58,7 +60,14 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
+    fun getPreviousAnswerForCurrentQuestion(): QuizAnswer? {
+        currentSession?.let {
+            return it.getAnswerForQuestion(it.getCurrentQuestion())
+        } ?: return null
+    }
+
     fun clearAll() {
+        _error.value = null
         _quizSession.value = null
         _sessionOver.value = null
     }

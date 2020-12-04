@@ -58,7 +58,7 @@ class WelcomeFragment : Fragment() {
     private fun observeQuizFinished() {
         viewModel.sessionOver.observe(viewLifecycleOwner, Observer {
             it?.let {
-                setViews(it.quiz)
+                setViews(it.getQuiz())
                 Snackbar.make(
                     tvWelcomeTitle,
                     "Completed Quiz ${it.getQuizTitle()} with ${it.countCorrect()} " +
@@ -66,7 +66,7 @@ class WelcomeFragment : Fragment() {
                     500
                 ).show()
                 viewModel.clearAll()
-            } ?: Log.e("WelcomeFragment", "Session is not over.")
+            }
         })
     }
 }

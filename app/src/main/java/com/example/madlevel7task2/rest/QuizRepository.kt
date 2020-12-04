@@ -51,6 +51,7 @@ class QuizRepository {
                     .await()
 
                 _createSuccess.value = true
+                _createSuccess.value = false
             }
         } catch (e: Exception) {
             throw QuizSaveError("Create Error: " + e.message.toString(), e)
