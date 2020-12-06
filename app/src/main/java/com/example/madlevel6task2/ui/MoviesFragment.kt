@@ -50,6 +50,7 @@ class MoviesFragment : Fragment() {
             onSubmit(etYear.text.toString())
         }
         observeMovies()
+        observeErrors()
     }
 
     private fun onMovieClick(movieResult: MovieResult) {
