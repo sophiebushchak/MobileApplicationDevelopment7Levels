@@ -80,7 +80,6 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
                 false
             }
             date == null -> {
-                error.value = "Incorrect date format entered."
                 false
             } else -> true
         }
@@ -103,9 +102,11 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
                 releaseDateYear.toInt() < DateConstants.YEAR_MIN ||
                 releaseDateYear.toInt() > DateConstants.YEAR_MAX
             ) {
+                error.value = "Please enter a valid day, month and year."
                 return null
             }
         } catch (e: java.lang.NumberFormatException) {
+            error.value = "Please enter all date fields."
             return null
         }
         val sdf = SimpleDateFormat("yyyy-MM-dd")
@@ -113,6 +114,7 @@ class BacklogViewModel(application: Application) : AndroidViewModel(application)
         try {
             return sdf.parse(dateString)
         } catch (e: ParseException) {
+            error.value = "Please enter a valid date."
             return null
         }
 
