@@ -64,11 +64,12 @@ class AddGameFragment : Fragment() {
      * Sets observers on the error and success data from the view model.
      */
     private fun observeStatus() {
-        viewModel.error.observe(viewLifecycleOwner, Observer {
-            message ->
+        viewModel.error.observe(viewLifecycleOwner, Observer { message ->
+            println(message)
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
         })
         viewModel.success.observe(viewLifecycleOwner, Observer {
+            println("Successfully created a game.")
             findNavController().popBackStack()
         })
     }
