@@ -18,11 +18,16 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_quiz.*
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * This fragment holds the UI for playing a quiz.
  */
 class QuizFragment : Fragment() {
     private val viewModel: QuizSessionViewModel by activityViewModels()
 
+    /**
+     * Regular onCreateView method, except for that a callback is also made on the onBackPressedDispatcher.
+     * This allows the quiz session to go back a question if the current question is not the first question.
+     * Alternatively it finishes the quiz session prematurely if the user is on the first question and goes back.
+     */
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -44,29 +49,41 @@ class QuizFragment : Fragment() {
         initializeViews()
     }
 
-
+    /**
+     * Sets the click listener on the confirm answer button.
+     */
     private fun initializeViews() {
         btnConfirmAnswer.setOnClickListener {
             confirmAnswer()
         }
     }
 
+    /**
+     * Gets the currently checked radio button. If there is none, answers the quiz with a blank answer.
+     */
     private fun confirmAnswer() {
         val rbChosenId = answerOptionsRadioGroup.checkedRadioButtonId
         val rb: RadioButton? = answerOptionsRadioGroup.findViewById(rbChosenId)
         rb?.let {
             viewModel.answerQuestion(it.text.toString())
         } ?: viewModel.answerQuestion("")
-        answerOptionsRadioGroup.clearCheck()
     }
 
+    /**
+     * Updates the UI to display the current question and quiz session information.
+     */
     private fun updateViews(quizSession: QuizSession) {
         tvQuizIndicator.text = quizSession.getQuizTitle()
-        tvQuestionIndicator.text = "${quizSession.getCurrentQuestionNumber()}/${quizSession.getTotalQuestionNumber()}"
+        tvQuestionIndicator.text = getString(R.string.tvQuestionIndicator,
+            quizSession.getCurrentQuestionNumber(),
+            quizSession.getTotalQuestionNumber())
         tvQuestionText.text = quizSession.getCurrentQuestion().quizQuestionText
         fillRadioGroup(quizSession)
    }
 
+    /**
+     * Fills the radio group with quiz answers.
+     */
     private fun fillRadioGroup(quizSession: QuizSession) {
         val radioGroup = answerOptionsRadioGroup
         radioGroup.removeAllViews()
@@ -75,6 +92,7 @@ class QuizFragment : Fragment() {
             val rb = RadioButton(requireContext());
             rb.text = quizAnswer.answerText
             rb.id = radioButtonIncrements
+            //If a user navigates back and forth in the quiz, check the previously chosen answer.
             if (quizAnswer == viewModel.getPreviousAnswerForCurrentQuestion()) {
                 rb.isChecked = true
             }
@@ -83,7 +101,11 @@ class QuizFragment : Fragment() {
         }
     }
 
+    /**
+     * Observes some live values.
+     */
     private fun observeQuizSession() {
+        //Pass the current quizsession with its state to the updateViews method.
         viewModel.quizSession.observe(viewLifecycleOwner, Observer {
             it?.let {
                 updateViews(
@@ -91,11 +113,13 @@ class QuizFragment : Fragment() {
                 )
             }
         })
+        //Ends the session if the viewmodel emits a non-null value for sessionOver.
         viewModel.sessionOver.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 findNavController().popBackStack()
             }
         })
+        //Displays an error if one is made.
         viewModel.error.observe(viewLifecycleOwner, Observer {
             it?.let{
                 Snackbar.make(answerOptionsRadioGroup, it, 500).show()

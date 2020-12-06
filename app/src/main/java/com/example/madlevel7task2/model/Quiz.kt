@@ -3,6 +3,9 @@ package com.example.madlevel7task2.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * A model for a quiz. A quiz has a name and description and a list of questions.
+ */
 @Parcelize
 class Quiz() : Parcelable {
     var quizName: String = ""

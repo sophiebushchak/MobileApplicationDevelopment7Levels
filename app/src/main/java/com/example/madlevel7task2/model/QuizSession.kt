@@ -1,5 +1,9 @@
 package com.example.madlevel7task2.model
 
+/**
+*   Model for a quiz session. A new quiz session is started every time a quiz is played and should
+ *   not be modified after the quiz is over or exited.
+ */
 class QuizSession(private val quiz: Quiz) {
     private val answers: MutableMap<QuizQuestion, QuizAnswer?> = mutableMapOf()
     private var currentQuestionIndex: Int = 0

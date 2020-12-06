@@ -5,6 +5,10 @@ import com.example.madlevel7task2.model.QuizAnswer
 import com.example.madlevel7task2.model.QuizQuestion
 import kotlin.random.Random
 
+/**
+ * This class returns either a static example quiz, or it can generate a small arithmetic quiz
+ * repeatedly.
+ */
 class MakeExampleQuiz {
     companion object {
         fun getAQuiz(): Quiz {

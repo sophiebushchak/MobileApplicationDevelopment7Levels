@@ -18,6 +18,9 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
     val error: LiveData<String> get() = _error
     private var currentSession: QuizSession? = null
 
+    /**
+     * Resets all the live data values, and then starts a new quiz session.
+     */
     fun startQuizSession(quiz: Quiz) {
         _sessionOver.value = null
         _error.value = null
@@ -25,6 +28,10 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
         broadcastSession()
     }
 
+    /**
+     * Answers a quiz question with an answer.
+     * If the last question was answered, finish the session.
+     */
     fun answerQuestion(answerText: String) {
         if (answerText.isBlank()) {
             broadcastError("Please fill in an answer.")
@@ -45,6 +52,9 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
+    /**
+     * Go back a question.
+     */
     fun decrementQuestion() {
         currentSession?.let{
             it.decrementCurrentQuestion()
@@ -52,6 +62,9 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
         } ?: broadcastError("Something went wrong.")
     }
 
+    /**
+     * Check if the quiz session is currently on the first question.
+     */
     fun isOnFirstQuestion(): Boolean {
         return if (currentSession != null) {
             (currentSession!!.getCurrentQuestionNumber() == 1)
@@ -60,27 +73,43 @@ class QuizSessionViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
+    /**
+     * Gets the previous answer given for the current question.
+     */
     fun getPreviousAnswerForCurrentQuestion(): QuizAnswer? {
         currentSession?.let {
             return it.getAnswerForQuestion(it.getCurrentQuestion())
         } ?: return null
     }
 
+    /**
+     * Clears all livedata values.
+     */
     fun clearAll() {
         _error.value = null
         _quizSession.value = null
         _sessionOver.value = null
     }
 
+    /**
+     * Finishes the session.
+     */
     fun finishSession() {
         _sessionOver.value = currentSession
     }
 
+    /**
+     * Emit the [_quizSession] livedata with the [currentSession] as the session has important values
+     * that change once actions are performed.
+     */
     private fun broadcastSession() {
         _quizSession.value = currentSession
         println(currentSession)
     }
 
+    /**
+     * Emits a message through the [_error] livedata.
+     */
     private fun broadcastError(message: String) {
         _error.value = message
     }

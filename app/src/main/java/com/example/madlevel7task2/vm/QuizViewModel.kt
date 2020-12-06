@@ -24,6 +24,9 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     val errorText: LiveData<String>
         get() = _errorText
 
+    /**
+     * Gets the quizzes from the repository.
+     */
     fun getQuiz() {
         viewModelScope.launch {
             try {
@@ -37,6 +40,10 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /**
+     * Generates some quizzes with the [MakeExampleQuiz] class.
+     * Then it puts them into a [QuizzesWrapper] and saves them to the repository.
+     */
     fun createQuizzes() {
         val wrapper = QuizzesWrapper()
         wrapper.quizzes.add(MakeExampleQuiz.getAQuiz())
