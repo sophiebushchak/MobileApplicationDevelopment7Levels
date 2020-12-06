@@ -71,7 +71,9 @@ class MoviesFragment : Fragment() {
     private fun observeErrors() {
         viewModel.errorText.observe(viewLifecycleOwner, Observer {
             error ->
-            this.view?.let { Snackbar.make(it, error, Snackbar.LENGTH_SHORT).show() }
+            if (error != null) {
+                this.view?.let { Snackbar.make(it, error, Snackbar.LENGTH_SHORT).show() }
+            }
         })
     }
 
