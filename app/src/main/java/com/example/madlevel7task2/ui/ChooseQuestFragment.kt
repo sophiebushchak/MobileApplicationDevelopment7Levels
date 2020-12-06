@@ -20,6 +20,10 @@ import kotlinx.android.synthetic.main.fragment_choose_quest.*
 const val QUIZ_REQUEST_KEY = "req_quiz"
 const val QUIZ_REQUEST_BUNDLE = "bundle_quiz"
 
+/**
+ * The fragment where a Quest is chosen out of a list of Quests retrieved from the back-end.
+ * A Quest is a quiz.
+ */
 class ChooseQuestFragment : Fragment() {
     private val quizzes = arrayListOf<Quiz>()
     private val quizAdapter = QuizAdapter(quizzes, ::onQuizClick)
@@ -41,11 +45,17 @@ class ChooseQuestFragment : Fragment() {
         viewModel.getQuiz()
     }
 
+    /**
+     * Passes on a quiz to the quiz welcome fragment where a session can then be started.
+     */
     private fun onQuizClick(quiz: Quiz) {
         setFragmentResult(QUIZ_REQUEST_KEY, bundleOf(Pair(QUIZ_REQUEST_BUNDLE, quiz)))
         findNavController().navigate(R.id.action_chooseQuestFragment_to_welcomeFragment)
     }
 
+    /**
+     * Observe the viewmodel for a list of quizzes.
+     */
     private fun observeQuizzes() {
         viewModel.quizzes.observe(viewLifecycleOwner, Observer {
             quizzes ->

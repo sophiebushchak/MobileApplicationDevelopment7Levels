@@ -1,5 +1,9 @@
 package com.example.madlevel7task2.model
 
+/**
+ * A model for a quiz question. A quiz question has a question text, a list of quiz answers and
+ * a reference to the correct quiz answer.
+ */
 class QuizQuestion() {
     lateinit var quizQuestionText: String
     lateinit var quizAnswers: List<QuizAnswer>

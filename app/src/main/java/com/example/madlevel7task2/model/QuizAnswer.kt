@@ -1,5 +1,10 @@
 package com.example.madlevel7task2.model
 
+/**
+ * A model for a quiz answer. Technically a quiz answer should perhaps not be a model.
+ * However, for the sake of conciseness it is one. The advantage is that it can be potentially
+ * extended to hold for example a URI to an image.
+ */
 class QuizAnswer() {
     var answerText: String = ""
 

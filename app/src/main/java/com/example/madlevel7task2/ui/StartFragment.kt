@@ -13,6 +13,9 @@ import com.example.madlevel7task2.R
 import com.example.madlevel7task2.vm.QuizViewModel
 import kotlinx.android.synthetic.main.fragment_start.*
 
+/**
+ * The start screen fragment.
+ */
 class StartFragment : Fragment() {
     private val viewModel: QuizViewModel by activityViewModels()
 
@@ -35,6 +38,9 @@ class StartFragment : Fragment() {
         observeCreationStatus()
     }
 
+    /**
+     * Sets click listeners on the two buttons.
+     */
     private fun initializeButtons() {
         btnPlay.setOnClickListener {
             findNavController().navigate(R.id.action_startFragment_to_chooseQuestFragment)
@@ -44,6 +50,10 @@ class StartFragment : Fragment() {
         }
     }
 
+    /**
+     * Observes the creation of some quizzes. This is necessary for in case the firebase collection is empty.
+     * It can also be used to load some new randomized math quizzes.
+     */
     private fun observeCreationStatus() {
         viewModel.errorText.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -52,7 +62,7 @@ class StartFragment : Fragment() {
         })
         viewModel.createSuccess.observe(viewLifecycleOwner, Observer {
             if (it) {
-                Toast.makeText(activity, "Successfully created quizzes.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.toastSuccess), Toast.LENGTH_SHORT).show()
             }
         })
     }

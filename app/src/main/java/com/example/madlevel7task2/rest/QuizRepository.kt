@@ -13,6 +13,13 @@ import kotlinx.coroutines.withTimeout
 import java.lang.Exception
 import java.lang.reflect.GenericArrayType
 
+/**
+ * The repository that connects to Firebase to get the quizzes.
+ * When it retrieves the quizzes from the document, it converts them to the QuizzesWrapper class.
+ * The reason is that otherwise it would have to be converted to a List or Map.
+ * But a List or Map is generic and the Android Firebase library currently does not support
+ * something that is normally needed to map a document's data to a generic class.
+ */
 class QuizRepository {
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var quizDocument = firestore.collection("quests2").document("quizzes")
@@ -32,10 +39,10 @@ class QuizRepository {
                 val data = quizDocument
                     .get()
                     .await()
-                val quiz = data.toObject(QuizzesWrapper::class.java)
+                val quizzes = data.toObject(QuizzesWrapper::class.java)
 
-                if (quiz != null) {
-                    _quiz.value = quiz.quizzes
+                if (quizzes != null) {
+                    _quiz.value = quizzes.quizzes
                 }
             }
         } catch (e: Exception) {

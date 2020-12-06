@@ -33,11 +33,19 @@ class WelcomeFragment : Fragment() {
         observeQuizFinished()
     }
 
+    /**
+     * Starts the quiz session with the passed quiz.
+     */
     private fun onClickStart(quiz: Quiz) {
         viewModel.startQuizSession(quiz)
         findNavController().navigate(R.id.action_welcomeFragment_to_quizFragment)
     }
 
+    /**
+     * Updates the UI with information about the selected quiz. It also sets a click listener
+     * on the start quest button by passing the quiz parameter into [onClickStart].
+     * This allows the button to start the quiz previously selected in [ChooseQuestFragment]
+     */
     private fun setViews(quiz: Quiz) {
         tvWelcomeTitle.text = quiz.quizName
         tvWelcomeDescription.text = quiz.quizDescription
@@ -46,6 +54,9 @@ class WelcomeFragment : Fragment() {
         }
     }
 
+    /**
+     * Receives the quiz fragment result from [ChooseQuestFragment]
+     */
     private fun observeQuizSelected() {
         setFragmentResultListener(QUIZ_REQUEST_KEY) { _, bundle ->
             bundle.getParcelable<Quiz>(QUIZ_REQUEST_BUNDLE)?.let {
@@ -55,15 +66,21 @@ class WelcomeFragment : Fragment() {
         }
     }
 
+    /**
+     * This observer is important for when a quiz session is finished.
+     * [QuizSessionViewModel.sessionOver] holds a value of a quizsession that was played.
+     * This is used to both display a snackbar with the amount of questions correct, and to
+     * update the UI once more with the quiz inside if this fragment is navigated to by popping
+     * the backstack.
+     */
     private fun observeQuizFinished() {
         viewModel.sessionOver.observe(viewLifecycleOwner, Observer {
             it?.let {
                 setViews(it.getQuiz())
                 Snackbar.make(
                     tvWelcomeTitle,
-                    "Completed Quiz ${it.getQuizTitle()} with ${it.countCorrect()} " +
-                            "out of ${it.getTotalQuestionNumber()} correct.",
-                    500
+                    getString(R.string.snackbarComplete, it.getQuizTitle(), it.countCorrect(), it.getTotalQuestionNumber()),
+                    1500
                 ).show()
                 viewModel.clearAll()
             }
