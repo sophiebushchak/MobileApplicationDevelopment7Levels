@@ -1,6 +1,5 @@
 package com.example.madlevel6task2.rest
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.madlevel6task2.model.MovieResult
 import kotlinx.coroutines.withTimeout
@@ -23,13 +22,18 @@ class MovieDBRepository {
             val result = withTimeout(5_000) {
                 movieDBApiService.getPopularMovies(MovieDBConfig.API_KEY, year)
             }
-
+            if (result.results.isEmpty()) {
+                throw Error("No movies found for year: $year")
+            }
             _movies.value = result.results
         } catch (error: Throwable) {
-            throw TriviaRefreshError("Unable to refresh trivia", error)
+            var message = "Something went wrong while loading movies."
+            error.message?.let{
+                message = it
+            }
+            throw MovieLoadError(message, error)
         }
     }
 
-    class TriviaRefreshError(message: String, cause: Throwable) : Throwable(message, cause)
-
+    class MovieLoadError(message: String, cause: Throwable) : Throwable(message, cause)
 }

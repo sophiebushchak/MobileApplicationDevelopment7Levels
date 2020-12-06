@@ -24,9 +24,10 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
             try {
                 movieDBRepository.getMoviesForYear(year.toInt())
                 println("Requested for movieDBRepository to retrieve movies.")
-        } catch (error: MovieDBRepository.TriviaRefreshError) {
+        } catch (error: MovieDBRepository.MovieLoadError) {
                 _errorText.value = error.message
                 Log.e("Error", error.cause.toString())
+                _errorText.value = null
             }
         }
     }
