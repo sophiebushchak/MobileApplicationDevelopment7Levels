@@ -87,6 +87,7 @@ class QuizFragment : Fragment() {
     private fun fillRadioGroup(quizSession: QuizSession) {
         val radioGroup = answerOptionsRadioGroup
         radioGroup.removeAllViews()
+        radioGroup.clearCheck()
         var radioButtonIncrements = 0
         for (quizAnswer in quizSession.getCurrentQuestion().quizAnswers) {
             val rb = RadioButton(requireContext());
