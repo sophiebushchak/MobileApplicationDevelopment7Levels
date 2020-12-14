@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvHistoryLabelOpponent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/tvResultLabelOpponent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ivHistoryOpponentThrow"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/ivHistoryOpponentThrow"
+        app:layout_constraintTop_toBottomOf="@+id/ivHistoryOpponentThrow" />
+
+    <TextView
+        android:id="@+id/tvHistoryLabelPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/tvResultLabelYou"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ivHistoryPlayerThrow"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/ivHistoryPlayerThrow"
+        app:layout_constraintTop_toBottomOf="@+id/ivHistoryPlayerThrow" />
+
+    <ImageView
+        android:id="@+id/ivHistoryOpponentThrow"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:background="#5D6FCF"
+        app:layout_constraintBottom_toTopOf="@+id/tvHistoryLabelOpponent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvHistoryVersus"
+        app:layout_constraintTop_toBottomOf="@+id/tvHistoryDate" />
+
+    <TextView
+        android:id="@+id/tvHistoryVersus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvVersus"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/ivHistoryOpponentThrow"
+        app:layout_constraintEnd_toStartOf="@+id/ivHistoryOpponentThrow"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivHistoryPlayerThrow"
+        app:layout_constraintTop_toTopOf="@+id/ivHistoryOpponentThrow" />
+
+    <ImageView
+        android:id="@+id/ivHistoryPlayerThrow"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:background="#5D6FCF"
+        app:layout_constraintBottom_toTopOf="@+id/tvHistoryLabelPlayer"
+        app:layout_constraintEnd_toStartOf="@+id/tvHistoryVersus"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHistoryDate" />
+
+    <TextView
+        android:id="@+id/tvHistoryDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHistoryResult"
+        tools:text="Mon Jun 22 09:15:44 GMT+00:00 2020" />
+
+    <TextView
+        android:id="@+id/tvHistoryResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Draw" />
+</androidx.constraintlayout.widget.ConstraintLayout>

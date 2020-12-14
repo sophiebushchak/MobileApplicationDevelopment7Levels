@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MadLevel4Task2</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="tvPlayTitle">Welcome</string>
+    <string name="tvPlayInstructions">Instructions: select Rock, Paper or Scissors to play.</string>
+    <string name="tvStatisticsDescription">Your all time statistics</string>
+    <string name="tvVersus">V.S.</string>
+    <string name="tvResult">You %s!</string>
+    <string name="tvResultLabelYou">You</string>
+    <string name="tvResultLabelOpponent">Opponent</string>
+    <string name="action_goto_history">View History</string>
+    <string name="action_delete_history">Delete History</string>
+    <string name="action_pop_backstack">Go Back</string>
+    <string name="tvStatistics">Win: %d Draw: %d Lose: %d</string>
+</resources>
