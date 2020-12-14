@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Game Backlog</string>
+    <string name="add_game_fragment_title">Add Game</string>
+    <string name="action_settings">Settings</string>
+    <string name="tvGameReleaseDate">Release: %s</string>
+    <string name="action_delete_backlog">Delete Backlog</string>
+    <string name="game_removed">Removed game: %s</string>
+    <string name="undo_string">Undo</string>
+    <string name="backlog_cleared">Cleared backlog</string>
+    <string name="tfTitleHint">Title</string>
+    <string name="tfPlatformsHint">Platforms</string>
+    <string name="tfReleaseDateDayHint">Day</string>
+    <string name="tfReleaseDateMonthHint">Month</string>
+    <string name="tfReleaseDateYearHint">Year</string>
+</resources>
