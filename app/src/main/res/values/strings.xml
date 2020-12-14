@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MadLevel1Task2</string>
+    <string name="conjunctionANDTitleText">Conjunction (AND)</string>
+    <string name="trueText">T</string>
+    <string name="falseText">F</string>
+    <string name="aColumnHeaderText">A</string>
+    <string name="bColumnHeaderText">B</string>
+    <string name="input_header_text">A^B</string>
+    <string name="button_text">Submit</string>
+</resources>
