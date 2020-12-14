@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="tfYearHint">Year</string>
+    <string name="tvMovieSearchLabel">The most popular movies of</string>
+    <string name="btnSubmit">Submit</string>
+    <string name="tvDetailsOverview">Overview</string>
+    <!-- Strings used for fragments for navigation -->
+</resources>
